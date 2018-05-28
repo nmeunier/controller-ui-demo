@@ -1,6 +1,6 @@
 # Controller Ui
 
-Controller Ui is a Angular component library for build train cockpit.
+Controller Ui is a Angular component library to build train cockpit.
 
 This project explain how to use the [Controller Ui]() library.
 
