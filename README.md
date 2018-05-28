@@ -19,8 +19,20 @@ Install Controller Ui
 
 ## Example
 
-[controller-ui example page](http://htmlpreview.github.io/?https://github.com/nmeunier/controller-ui/blob/master/example/index.html)
+Run this project for test all library components :
 
+* Install Angular cli
+
+* Clone this project
+
+* Install dependencies :
+run the cloned folder : ```npm install```
+
+* Build library :
+ ```ng build controller-ui```
+
+* Run the project :
+ ```ng serve```
 
 ## Documentation
 
