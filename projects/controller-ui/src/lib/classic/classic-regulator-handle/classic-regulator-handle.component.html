@@ -1,0 +1,4 @@
+<div class="ctrl-traction-container" #ctrlTractionCtn (panmove)="onPan($event)" (panstart)="onPanStart($event)">
+  <cui-regulator-handle class="ctrl-traction-handle" [ngStyle]="{'width': handleWidth + 'px', 'height': handleHeight + 'px', 'top': handlePosY + 'px', 'left': handlePosX + 'px', 'transform': 'rotate('+ rotate +'deg)', 'transform-origin': handleRotateAxisX +'px '+ handleRotateAxisY +'px'}"></cui-regulator-handle>
+  <span *ngFor="let gradItem of graduationsObjs;" class="graduation-item" [ngStyle]="{'font-size':graduationWidth*2+'px', 'width': graduationWidth+'px', 'top': gradItem.top+'px', 'left':gradItem.left+'px','transform-origin': gradItem.rotateX +'px '+ gradItem.rotateY +'px', 'transform': 'rotate('+ gradItem.rotate+'deg)' }">{{gradItem.legend}}</span>
+</div>

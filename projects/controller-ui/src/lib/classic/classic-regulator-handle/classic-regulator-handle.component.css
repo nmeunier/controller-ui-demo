@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Pathway+Gothic+One');
+
+.ctrl-traction-container{
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    width:100%;
+    height: 100%;
+}
+
+.ctrl-traction-handle{
+    position: absolute;
+    z-index: 2;
+}
+
+.graduation-item{
+    display: block;
+    font-family: 'Pathway Gothic One', sans-serif;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+}

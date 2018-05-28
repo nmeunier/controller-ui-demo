@@ -1,0 +1,4 @@
+<div class="gauge-container" #gaugeContainer>
+	<canvas #gauge width="{{canvasWH}}" height="{{canvasWH}}"></canvas>
+	<canvas #gaugePointer class="gauge-pointer" width="{{canvasWH}}" height="{{canvasWH}}" [ngStyle]="{'transform': 'translate(-50%, -50%) rotate(' + rotateValue + 'deg)'}"></canvas>
+</div>

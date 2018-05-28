@@ -1,0 +1,5 @@
+<div class="gauge-container" #gaugeContainer>
+	<canvas #gauge width="{{canvasWH}}" height="{{canvasWH}}"></canvas>
+	<canvas #gaugePointer class="gauge-pointer pointer-primary" width="{{canvasWH}}" height="{{canvasWH}}" [ngStyle]="{'transform': 'translate(-50%, -50%) rotate(' + rotateValue + 'deg)'}"></canvas>
+	<canvas #gaugeSecPointer class="gauge-pointer pointer-secondary" width="{{canvasWH}}" height="{{canvasWH}}" [ngStyle]="{'transform': 'translate(-50%, -50%) rotate(' + secRotateValue + 'deg)'}"></canvas>
+</div>

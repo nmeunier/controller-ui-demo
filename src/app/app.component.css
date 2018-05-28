@@ -1,0 +1,39 @@
+.subtitle{
+    color: rgba(0,0,0,.54);
+    font-size: 12px;
+    margin: 0;
+    line-height: 16px;
+}
+
+.component-card {
+    margin: 10px;
+}
+
+.container {
+    padding: 10px;
+}
+
+
+.cui-example-container{
+    display: flex;
+}
+
+.cui-component-example{
+    flex: 1;
+    height: 300px;
+}
+
+.cui-inputs{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+  
+.cui-inputs > * {
+    width: 100%;
+}
+
+.slider-label {
+    color: rgba(0,0,0,.54);
+    font-size: 14px;
+}

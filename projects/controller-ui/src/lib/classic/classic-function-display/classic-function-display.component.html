@@ -1,0 +1,6 @@
+<div #functionCtn class="function-container" >
+  <div *ngFor="let fn of functions" [class.function-enable]="fn.value" [ngClass]="format" class="function-item" [ngStyle]="{'width': itemSize + 'px', 'height': itemSize + 'px'}">
+      <span class="material-icons function-item-icon {{fn.iconCls}}" *ngIf="fn.iconCls" [ngStyle]="{'line-height': itemSize + 'px', 'font-size': iconSize + 'px'}"></span>
+      <p *ngIf="!fn.iconCls" class="function-icon-text" [ngStyle]="{'line-height': (itemSize / 3) + 'px', 'font-size': (iconSize / 3) + 'px'}">{{fn.name}}</p>
+  </div>
+</div>

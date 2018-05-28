@@ -1,20 +1,147 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<mat-toolbar>
+    <div>
+    <h1>{{ title }}</h1>
+    <p class="subtitle">Angular UI component for train controller</p>
+    </div>
+</mat-toolbar>
+    <div class="container">
+
+    <!-- Classic speed gauge  -->
+    <mat-card class="component-card">
+        <mat-card-header>
+        <mat-card-title>Classic speed gauge component</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="cui-example-container">
+            <div class="cui-component-example">
+                <cui-classic-speed-gauge [unit]="classicSpeedGaugeUnit" [maxSpeed]="classicSpeedGaugeMaxSpeed" [value]="classicSpeedGaugeValue"></cui-classic-speed-gauge>
+            </div>
+            <div class="cui-inputs">
+                <mat-form-field>
+                    <input matInput placeholder="unit" [(ngModel)]="classicSpeedGaugeUnit">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="maxValue" [(ngModel)]="classicSpeedGaugeMaxSpeed">
+                </mat-form-field>
+
+                <div class="slider-label">value</div>
+                <mat-slider [max]="1" [min]="0" [step]="0.01"  [thumbLabel]="true" [(ngModel)]="classicSpeedGaugeValue"></mat-slider>
+
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button color="primary">Documentation</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <!-- Classic brake gauge  -->
+    <mat-card class="component-card">
+        <mat-card-header>
+        <mat-card-title>Classic brake gauge component</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="cui-example-container">
+            <div class="cui-component-example">        
+                <cui-classic-brake-gauge #brakeGauge class="brake-panel" [value]="classicBrakeGaugeValue" [maxValue]="classicBrakeGaugeMaxValue" [secValue]=(classicBrakeGaugeSecValue) [maxSecValue]="classicBrakeGaugeMaxSecValue" [maxGraduation]="classicBrakeGaugeMaxGraduation" [unit]="classicBrakeGaugeUnit"></cui-classic-brake-gauge>
+            </div>
+            <div class="cui-inputs">
+                <mat-form-field>
+                    <input matInput placeholder="unit" [(ngModel)]="classicBrakeGaugeUnit">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="maxGraduation" [(ngModel)]="classicBrakeGaugeMaxGraduation">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="maxValue" [(ngModel)]="classicBrakeGaugeMaxValue">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="maxSecValue" [(ngModel)]="classicBrakeGaugeMaxSecValue">
+                </mat-form-field>
+
+                <div class="slider-label">value</div>
+                <mat-slider [max]="1" [min]="0" [step]="0.01"  [thumbLabel]="true" [(ngModel)]="classicBrakeGaugeValue"></mat-slider>
+
+                <div class="slider-label">secValue</div>
+                <mat-slider [max]="1" [min]="0" [step]="0.01"  [thumbLabel]="true" [(ngModel)]="classicBrakeGaugeSecValue"></mat-slider>
+
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button color="primary">Documentation</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <!-- Classic function display  -->
+    <mat-card class="component-card">
+        <mat-card-header>
+        <mat-card-title>Classic function display component</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="cui-example-container">
+            <div class="cui-component-example">
+                <cui-classic-function-display [functions]="classicFunctionDisplayGroup"></cui-classic-function-display>
+            </div>
+            <div class="cui-inputs">
+                <p>
+                    <mat-slide-toggle [checked]="classicFunctionDisplayValue0" (change)="classicFunctionDisplayToggleFn(0)">Fn0</mat-slide-toggle>
+                </p>
+                <p>
+                    <mat-slide-toggle [checked]="classicFunctionDisplayValue1" (change)="classicFunctionDisplayToggleFn(1)">Fn1</mat-slide-toggle>
+                </p>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button color="primary">Documentation</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <!-- Classic direction handle -->
+    <mat-card class="component-card">
+        <mat-card-header>
+        <mat-card-title>Classic direction handle component</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="cui-example-container">
+            <div class="cui-component-example">
+                <cui-classic-direction-handle component-type="tool" [beginFrom]="classicDirectionHandleBeginFrom" [steps]="classicDirectionHandleSteps" [(value)]="classicDirectionHandleValue"></cui-classic-direction-handle>
+            </div>
+            <div class="cui-inputs">
+                <mat-form-field>
+                    <input matInput placeholder="beginFrom" [(ngModel)]="classicDirectionHandleBeginFrom">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="steps" [(ngModel)]="classicDirectionHandleSteps">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="value" [(ngModel)]="classicDirectionHandleValue">
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button color="primary">Documentation</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <!-- Classic regulator handle -->
+    <mat-card class="component-card">
+        <mat-card-header>
+        <mat-card-title>Classic regulator handle component</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="cui-example-container">
+            <div class="cui-component-example">
+                <cui-classic-regulator-handle component-type="tool" [graduations]="classicRegulatorHandleGraduations" [steps]="classicRegulatorHandleSteps" [(value)]="classicRegulatorHandleValue"></cui-classic-regulator-handle>
+            </div>
+            <div class="cui-inputs">
+                <mat-form-field>
+                    <input matInput placeholder="graduations" [(ngModel)]="classicRegulatorHandleGraduations">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="steps" [(ngModel)]="classicRegulatorHandleSteps">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="value" [(ngModel)]="classicRegulatorHandleValue">
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button color="primary">Documentation</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

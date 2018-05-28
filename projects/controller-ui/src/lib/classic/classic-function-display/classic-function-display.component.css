@@ -1,0 +1,29 @@
+.function-container{
+    overflow: hidden;
+    height: 100%;
+}
+
+.function-item{
+    margin: 5px;
+    background-color: #777;
+    overflow: hidden;
+    border: solid 1px #4b7763;
+    border-top: solid 3px #4b7763;
+    border-left: solid 3px #4b7763;
+    color: #666;
+    text-align: center;
+    background-image: radial-gradient(closest-corner circle at center, #666, #777);
+}
+
+.function-icon-text{
+    margin: 0;
+}
+
+.function-enable{
+    background-image: radial-gradient(closest-corner circle at center, #f8ff90, #c6c77b);
+}
+
+.function-item{
+    display: inline-block;
+    margin: 5px;
+}

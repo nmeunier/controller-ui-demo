@@ -1,0 +1,4 @@
+<div class="ctrl-direction-container" #ctrlDirectionCtn (panstart)="onPanStart($event)" (panmove)="onPan($event)">
+  <cui-direction-handle class="ctrl-direction-handle" #handle [ngStyle]="{'width': handleWidth + 'px', 'height': handleHeight + 'px', 'top': handlePosY + 'px', 'left': handlePosX + 'px', 'transform': 'rotate('+ rotate +'deg)', 'transform-origin': handleRotateAxisX +'px '+ handleRotateAxisY +'px'}">
+  </cui-direction-handle>
+</div>
