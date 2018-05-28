@@ -19,8 +19,10 @@ Install Controller Ui
 
 ## Example
 
+[controller-ui example page](http://htmlpreview.github.io/?https://github.com/nmeunier/controller-ui/blob/master/example/index.html)
 
 
 ## Documentation
 
+[controller-ui documentation](https://github.com/nmeunier/controller-ui/blob/master/projects/controller-ui/README.md)
 
