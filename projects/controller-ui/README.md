@@ -1,16 +1,33 @@
 # Controller Ui library
 
-Controller Ui is a Angular component library to build train cockpit.
+Controller Ui is a component library for Angular.
+This library is designed to create interfaces inspired by train cockip and contains gauges, handlers and indicators.
 
-## Getting started
+## Prerequisites
 
-Before using Controller Ui in your project, install the needed dependencies
+Before using Controller Ui in your project, install the needed dependencies :
 
-* Hammer.js
-``` npm install --save hammerjs```
+* Install Hammer.js
+``` 
+npm install --save hammerjs
+```
 
-* Web Font Loader 
-``` npm install --save webfontloader```
+Import hammerjs in your Angular project by adding this line in your src/main.js
+
+```ts
+import 'hammerjs';
+```
+
+* Install Web Font Loader 
+```
+npm install --save webfontloader
+```
+
+## Installation
+
+```
+npm install controller-ui
+```
 
 ## Classic components
 
@@ -163,4 +180,4 @@ Manipulator handle component
 
 ## License
 
-GNU Public License, version 3 (https://www.gnu.org/licenses/quick-guide-gplv3.fr.html)
+[GNU Public License, version 3](https://www.gnu.org/licenses/quick-guide-gplv3.fr.html)

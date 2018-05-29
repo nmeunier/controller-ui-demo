@@ -1,23 +1,14 @@
 # Controller Ui
 
-Controller Ui is a Angular component library to build train cockpit.
+This project is the Angular project for build the [controller-ui](https://www.npmjs.com/package/controller-ui) library.
 
-This project explain how to use the [Controller Ui]() library.
+Use this project for test or build the library.
 
-## Getting started
+## Using controller-ui
 
-Before using Controller Ui in your project, install the needed dependencies
+To use controller-ui please refer to the npm page : [https://www.npmjs.com/package/controller-ui](https://www.npmjs.com/package/controller-ui)
 
-* Hammer.js
-``` npm install --save hammerjs```
-
-* Web Font Loader 
-``` npm install --save webfontloader```
-
-Install Controller Ui
-``` npm install --save controllerui```
-
-## Example
+## Run the project 
 
 Run this project for test all library components :
 
@@ -25,14 +16,22 @@ Run this project for test all library components :
 
 * Clone this project
 
+* Open a console in the cloned directory
+
 * Install dependencies :
-run the cloned folder : ```npm install```
+```
+npm install
+```
 
 * Build library :
- ```ng build controller-ui```
+ ```
+ ng build controller-ui
+ ```
 
 * Run the project :
- ```ng serve```
+ ```
+ ng serve
+ ```
 
 ## Documentation
 
