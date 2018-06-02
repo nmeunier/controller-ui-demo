@@ -1,0 +1,64 @@
+.toggle-container{
+    width: 100px;
+    height: 200px;
+    position: relative;
+}
+
+.switch-button{
+    position: absolute;
+    width: 60%;
+    left: 20%;
+    z-index: 30;
+    border: solid 1px #000;
+}
+
+.switch-button-on{
+    border-radius: 20% 20% 30% 30% / 20% 20% 80% 80%;
+    background-image: linear-gradient(to top,  rgba(0,0,0,1) 80%, #fff 90%, rgba(0,0,0,1) 100%);
+}
+
+.switch-button-off{
+    border-radius: 40% 40% 20% 20%  / 80% 80% 20% 20%;
+    background-image: linear-gradient(to top,  rgba(0,0,0,1) 0%, #fff 10%, rgba(0,0,0,1) 20%);
+}
+
+.switch-base{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    width: calc(40% - 4px);
+    height: 40%;
+    z-index: 20;
+    border: solid 1px #4b7763;
+    border-top: solid 3px #4b7763;
+    border-left: solid 3px #4b7763;
+}
+
+.switch-base-on{
+    background-image: linear-gradient(to top,  rgba(0,0,0,1) 20%, #fff 40%, rgba(0,0,0,1) 60%);
+}
+
+.switch-base-off{
+    background-image: linear-gradient(to top,  rgba(0,0,0,1) 40%, #fff 60%, rgba(0,0,0,1) 80%);
+}
+
+.switch-label{
+    position: absolute;
+    border:solid 1px #a8a8a8;
+    border-bottom: solid 3px #a8a8a8;
+    border-right: solid 3px #a8a8a8;
+    background-color: #dedede;
+    width: 100%;
+    padding: 4% 0;
+    text-align: center;
+}
+
+.switch-label-bottom{
+    bottom: 0;
+    top: none;
+}
+
+.switch-label-top{
+    top: 0;
+    bottom: none;
+}

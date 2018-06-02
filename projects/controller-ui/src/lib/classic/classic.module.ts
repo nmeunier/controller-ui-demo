@@ -8,6 +8,7 @@ import { ClassicRegulatorHandleComponent } from './classic-regulator-handle/clas
 
 import { DirectionHandleComponent } from './classic-direction-handle/direction-handle.component';
 import { RegulatorHandleComponent } from './classic-regulator-handle/regulator-handle.component';
+import { ClassicToggleSwitchComponent } from './classic-toggle-switch/classic-toggle-switch.component';
 
 @NgModule({
   imports: [
@@ -20,14 +21,16 @@ import { RegulatorHandleComponent } from './classic-regulator-handle/regulator-h
     ClassicRegulatorHandleComponent,
     ClassicFunctionDisplayComponent,
     DirectionHandleComponent,
-    RegulatorHandleComponent
+    RegulatorHandleComponent,
+    ClassicToggleSwitchComponent
   ],
   exports: [
     ClassicSpeedGaugeComponent,
     ClassicBrakeGaugeComponent,
     ClassicDirectionHandleComponent,
     ClassicRegulatorHandleComponent,
-    ClassicFunctionDisplayComponent
+    ClassicFunctionDisplayComponent,
+    ClassicToggleSwitchComponent
   ]
 })
 export class ClassicModule { }
