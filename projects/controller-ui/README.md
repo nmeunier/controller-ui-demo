@@ -178,6 +178,29 @@ Manipulator handle component
 | value | current value (Two way binding property) | number |
 
 
+
+#### Classic toggle switch
+
+Toggle switch component
+
+```html
+<cui-classic-toggle-switch 
+  [label]="classicToggleSwitchLabel"
+  [labelPosition]="classicToggleSwitchLabelPosition"
+  [(value)]="classicToggleSwitchValue">
+</cui-classic-toggle-switch>
+```
+
+| Parameter | Description | Type |
+| --- | --- | --- |
+| label | Text to display in label | String |
+| labelPosition | Label position (bottom / top) | String |
+| value | current value (Two way binding property) | Boolean |
+
+
+
+
+
 ## License
 
 [GNU Public License, version 3](https://www.gnu.org/licenses/quick-guide-gplv3.fr.html)

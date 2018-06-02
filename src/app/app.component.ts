@@ -39,6 +39,10 @@ export class AppComponent {
   public classicRegulatorHandleSteps = 4;
   public classicRegulatorHandleValue = 0;
 
+  public classicToggleSwitchValue = true;
+  public classicToggleSwitchLabel = 'Switch demo';
+  public classicToggleSwitchLabelPosition = 'bottom';
+
   public classicFunctionDisplayToggleFn(_value) {
 
     this['classicFunctionDisplayValue' + _value] = !this['classicFunctionDisplayValue' + _value];
@@ -54,6 +58,8 @@ export class AppComponent {
     }];
   }
 
-
+  public classicToggleSwitchToggle() {
+    this.classicToggleSwitchValue = !this.classicToggleSwitchValue;
+  }
 
 }
