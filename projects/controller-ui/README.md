@@ -1,7 +1,7 @@
 # Controller Ui library
 
 Controller Ui is a component library for Angular.
-This library is designed to create interfaces inspired by train cockip and contains gauges, handlers and indicators.
+This library is designed to create interfaces inspired by train cockpit and contains gauges, handlers and indicators.
 
 ## Prerequisites
 
