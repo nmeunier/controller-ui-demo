@@ -16,10 +16,6 @@
       "es2017",
       "dom"
     ],
-    "paths": {
-      "controller-ui": [
-        "dist/controller-ui"
-      ]
-    }
+    "paths": { }
   }
 }
