@@ -29,6 +29,10 @@ npm install --save webfontloader
 npm install controller-ui
 ```
 
+## Demo
+
+View components in action at [demo.cabview.io](https://demo.cabview.io)
+
 ## Classic components
 
 Gauge and handle UI inspirate from 60'/80' train cockpit. Especialy [JR 103 cockpit](https://commons.wikimedia.org/wiki/File:JNR_Tc103-235cab.jpg#/media/File:JNR_Tc103-235cab.jpg) 
