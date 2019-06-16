@@ -43,9 +43,9 @@ export class AppComponent {
   public classicToggleSwitchLabel = 'Switch demo';
   public classicToggleSwitchLabelPosition = 'bottom';
 
-  public classicFunctionDisplayToggleFn(_value) {
+  public classicFunctionDisplayToggleFn(value) {
 
-    this['classicFunctionDisplayValue' + _value] = !this['classicFunctionDisplayValue' + _value];
+    this['classicFunctionDisplayValue' + value] = !this['classicFunctionDisplayValue' + value];
 
     this.classicFunctionDisplayGroup = [{
       name: 'Fn0',

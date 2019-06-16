@@ -8,9 +8,9 @@ import { Component, OnInit, OnChanges, AfterContentInit, ViewChild,
 })
 export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, AfterContentInit {
 
-    private _value = 0;
+    private internalValue = 0;
 
-    @ViewChild('ctrlTractionCtn') ctrlTractionCtn: ElementRef;
+    @ViewChild('ctrlTractionCtn', {static: true}) ctrlTractionCtn: ElementRef;
     @Input()steps?;
     @Input()graduations?: string;
 
@@ -18,14 +18,14 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
     @Output() valueChange = new EventEmitter();
     @Input()
     get value() {
-        return this._value;
+        return this.internalValue;
     }
 
     set value(val: number) {
         val = Math.round(val * 100) / 100;
-        if (val !== this._value) {
-            this._value = val;
-            this.valueChange.emit(this._value);
+        if (val !== this.internalValue) {
+            this.internalValue = val;
+            this.valueChange.emit(this.internalValue);
         }
     }
 
@@ -94,7 +94,7 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
         if (! this.steps) {
             this.steps = 4;
         } else {
-            this.steps = Number.parseInt(this.steps);
+            this.steps = Number.parseInt(this.steps, 10);
         }
 
         this.stepAngle = (this.angleMax - this.origineAngle) / this.steps;

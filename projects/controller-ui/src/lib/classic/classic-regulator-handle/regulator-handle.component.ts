@@ -7,7 +7,7 @@ import { Component, AfterViewInit, AfterContentInit, ViewChild, ElementRef } fro
 })
 export class RegulatorHandleComponent implements AfterContentInit, AfterViewInit {
 
-    @ViewChild('handleCanvas') handle: ElementRef;
+    @ViewChild('handleCanvas', {static: true}) handle: ElementRef;
 
     private handleCtx: CanvasRenderingContext2D;
     public handleWidth = 550;

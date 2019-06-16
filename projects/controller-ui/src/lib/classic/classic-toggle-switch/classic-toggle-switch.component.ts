@@ -7,7 +7,7 @@ import { Component, Input, Output, ViewChild, EventEmitter, ElementRef } from '@
 })
 export class ClassicToggleSwitchComponent {
 
-    private _value = true;
+    private internalValue = true;
     private steps = 2;
     public x = 0;
     private startY = 0;
@@ -16,8 +16,8 @@ export class ClassicToggleSwitchComponent {
     public cursorHeight = this.containerHeight / 3;
     public y = this.cursorHeight * 0.5;
 
-    @ViewChild('switchBtn') switchBtn: ElementRef;
-    @ViewChild('toggleCtn') toggleCtn: ElementRef;
+    @ViewChild('switchBtn', {static: true}) switchBtn: ElementRef;
+    @ViewChild('toggleCtn', {static: true}) toggleCtn: ElementRef;
     @Input() label: string;
     @Input() labelPosition?: string;
 
@@ -26,15 +26,15 @@ export class ClassicToggleSwitchComponent {
     @Output() valueChange = new EventEmitter();
     @Input()
     get value() {
-        return this._value;
+        return this.internalValue;
     }
 
     set value(val: boolean) {
-        if (this._value !== val) {
-            this._value = val;
-            this.valueChange.emit(this._value);
+        if (this.internalValue !== val) {
+            this.internalValue = val;
+            this.valueChange.emit(this.internalValue);
 
-            if (this._value) {
+            if (this.internalValue) {
               this.y = this.cursorHeight * 0.5;
             } else {
               this.y = this.cursorHeight * 1.5;

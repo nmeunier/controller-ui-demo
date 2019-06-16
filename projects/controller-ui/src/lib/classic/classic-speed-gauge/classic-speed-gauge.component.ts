@@ -8,9 +8,9 @@ import { FontLoaderService } from '../../font-loader.service';
   styleUrls: ['./classic-speed-gauge.component.css']
 })
 export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentInit, OnChanges {
-    @ViewChild('gauge') gauge: ElementRef;
-    @ViewChild('gaugePointer') gaugePointer: ElementRef;
-    @ViewChild('gaugeContainer') gaugeContainer: ElementRef;
+    @ViewChild('gauge', {static: true}) gauge: ElementRef;
+    @ViewChild('gaugePointer', {static: true}) gaugePointer: ElementRef;
+    @ViewChild('gaugeContainer', {static: true}) gaugeContainer: ElementRef;
     @Input() maxSpeed: number;
     @Input() unit?: string;
     @Input() value: number;
@@ -47,21 +47,21 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    public setValue(_value) {
+    public setValue(value) {
 
-        _value = _value * 100;
+        value = value * 100;
 
-        if (_value < 0) {
-            _value = 0;
+        if (value < 0) {
+            value = 0;
         }
 
-        if (_value > 100) {
-            _value = 100;
+        if (value > 100) {
+            value = 100;
         }
 
         const range = this.from - this.to;
 
-        this.rotateValue = _value * range / 100;
+        this.rotateValue = value * range / 100;
 
     }
 
@@ -197,33 +197,33 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    private drawGraduations(_gradNumber: number, _main: number, _sub: number) {
+    private drawGraduations(gradNumber: number, main: number, sub: number) {
 
-        _gradNumber = _gradNumber + 1;
+        gradNumber = gradNumber + 1;
 
-        if (_gradNumber < 2) {
+        if (gradNumber < 2) {
             throw new Error('Analog gauge can\'t have less than 2 graduation');
         }
 
         const useableRange = this.from - this.to;
-        const rangePart = useableRange / (_gradNumber - 1);
+        const rangePart = useableRange / (gradNumber - 1);
 
         const current = this.to;
-        for (let i = 0; i < _gradNumber; i++) {
+        for (let i = 0; i < gradNumber; i++) {
 
             let speedText = '';
             let style = 'normal';
 
-            if (i % _sub === 0) {
+            if (i % sub === 0) {
                 style = 'sub';
             }
 
-            if (i % _main === 0) {
+            if (i % main === 0) {
                 style = 'main';
-                speedText = (this.maxSpeed - ((this.maxSpeed * i) / (_gradNumber - 1))).toString();
+                speedText = (this.maxSpeed - ((this.maxSpeed * i) / (gradNumber - 1))).toString();
             }
 
-            if (i === _gradNumber - 1) {
+            if (i === gradNumber - 1) {
                 style = 'main';
                 speedText = '0';
             }
@@ -233,83 +233,83 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    private drawScale(_angle, _type: string, _speedText?: string) {
+    private drawScale(angle, type: string, speedText?: string) {
 
         const circleRadius = this.radius - this.outCircleWidth;
         const secCircleRadius = this.radius - this.graduateLength;
         const mainGraduateAngle = 2;
 
-        switch (_type) {
+        switch (type) {
             case 'normal':
 
                 this.ctx.beginPath();
                 this.ctx.lineWidth = 1;
                 this.ctx.beginPath();
                 this.ctx.moveTo(
-                  this.radius + secCircleRadius * Math.sin((_angle * (Math.PI / 180))),
-                  this.radius + secCircleRadius * Math.cos((_angle * (Math.PI / 180)))
+                  this.radius + secCircleRadius * Math.sin((angle * (Math.PI / 180))),
+                  this.radius + secCircleRadius * Math.cos((angle * (Math.PI / 180)))
                 );
                 this.ctx.lineTo(
-                  this.radius + circleRadius * Math.sin((_angle * (Math.PI / 180))),
-                  this.radius + circleRadius * Math.cos((_angle * (Math.PI / 180)))
+                  this.radius + circleRadius * Math.sin((angle * (Math.PI / 180))),
+                  this.radius + circleRadius * Math.cos((angle * (Math.PI / 180)))
                 );
                 this.ctx.stroke();
 
-            break;
+                break;
             case 'sub':
 
                 this.ctx.beginPath();
                 this.ctx.lineWidth = 3;
                 this.ctx.beginPath();
                 this.ctx.moveTo(
-                  this.radius + secCircleRadius * Math.sin((_angle * (Math.PI / 180))),
-                  this.radius + secCircleRadius * Math.cos((_angle * (Math.PI / 180)))
+                  this.radius + secCircleRadius * Math.sin((angle * (Math.PI / 180))),
+                  this.radius + secCircleRadius * Math.cos((angle * (Math.PI / 180)))
                 );
                 this.ctx.lineTo(
-                  this.radius + circleRadius * Math.sin((_angle * (Math.PI / 180))),
-                  this.radius + circleRadius * Math.cos((_angle * (Math.PI / 180)))
+                  this.radius + circleRadius * Math.sin((angle * (Math.PI / 180))),
+                  this.radius + circleRadius * Math.cos((angle * (Math.PI / 180)))
                 );
                 this.ctx.stroke();
 
-            break;
+                break;
             case 'main':
 
                 this.ctx.beginPath();
                 this.ctx.fillStyle = '#000000';
                 this.ctx.moveTo(
-                  this.radius + secCircleRadius * Math.sin((_angle * (Math.PI / 180))),
-                  this.radius + secCircleRadius * Math.cos((_angle * (Math.PI / 180)))
+                  this.radius + secCircleRadius * Math.sin((angle * (Math.PI / 180))),
+                  this.radius + secCircleRadius * Math.cos((angle * (Math.PI / 180)))
                 );
                 this.ctx.lineTo(
-                  this.radius + circleRadius * Math.sin(((_angle + (mainGraduateAngle / 2)) * (Math.PI / 180))),
-                  this.radius + circleRadius * Math.cos(((_angle + (mainGraduateAngle / 2)) * (Math.PI / 180)))
+                  this.radius + circleRadius * Math.sin(((angle + (mainGraduateAngle / 2)) * (Math.PI / 180))),
+                  this.radius + circleRadius * Math.cos(((angle + (mainGraduateAngle / 2)) * (Math.PI / 180)))
                 );
                 this.ctx.lineTo(
-                  this.radius + circleRadius * Math.sin(((_angle - (mainGraduateAngle / 2)) * (Math.PI / 180))),
-                  this.radius + circleRadius * Math.cos(((_angle - (mainGraduateAngle / 2)) * (Math.PI / 180)))
+                  this.radius + circleRadius * Math.sin(((angle - (mainGraduateAngle / 2)) * (Math.PI / 180))),
+                  this.radius + circleRadius * Math.cos(((angle - (mainGraduateAngle / 2)) * (Math.PI / 180)))
                 );
                 this.ctx.closePath();
                 this.ctx.fill();
 
-                this.setMainGraduationValue(_angle, _speedText);
+                this.setMainGraduationValue(angle, speedText);
 
-            break;
+                break;
 
         }
     }
 
-    private setMainGraduationValue(_angle, _speedText) {
+    private setMainGraduationValue(angle, speedText) {
 
         const circleRadius = this.radius - this.radius * 34 / 100;
         const fontSize = this.radius * 0.16;
         const textWidth = fontSize / 10 * 4 * 3;
 
-        const topPos = this.radius + circleRadius * Math.cos((_angle * (Math.PI / 180))) + (fontSize / 2);
-        const leftPos = this.radius + circleRadius * Math.sin((_angle * (Math.PI / 180)));
+        const topPos = this.radius + circleRadius * Math.cos((angle * (Math.PI / 180))) + (fontSize / 2);
+        const leftPos = this.radius + circleRadius * Math.sin((angle * (Math.PI / 180)));
 
         this.ctx.font = fontSize + 'px Pathway Gothic One';
         this.ctx.textAlign = 'center';
-        this.ctx.fillText(_speedText, leftPos, topPos);
+        this.ctx.fillText(speedText, leftPos, topPos);
 
     }
 

@@ -7,7 +7,7 @@ import { Component, AfterContentInit, AfterViewInit, ViewChild, ElementRef, Inpu
 })
 export class DirectionHandleComponent implements AfterContentInit, AfterViewInit {
 
-    @ViewChild('handleCanvas') handle: ElementRef;
+    @ViewChild('handleCanvas', {static: true}) handle: ElementRef;
 
     private handleCtx: CanvasRenderingContext2D;
     public handleWidth = 600;

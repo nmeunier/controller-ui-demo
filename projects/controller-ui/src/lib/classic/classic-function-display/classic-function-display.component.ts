@@ -7,7 +7,7 @@ import { Component, AfterContentInit, Input, ViewChild, ElementRef } from '@angu
 })
 export class ClassicFunctionDisplayComponent implements AfterContentInit {
 
-    @ViewChild('functionCtn') functionCtn: ElementRef;
+    @ViewChild('functionCtn', {static: true}) functionCtn: ElementRef;
     @Input() functions: Array<any>;
 
     private containerSizeRef = 0;

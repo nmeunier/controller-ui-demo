@@ -8,10 +8,10 @@ import { FontLoaderService } from '../../font-loader.service';
 })
 export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentInit, OnChanges {
 
-    @ViewChild('gauge') gauge: ElementRef;
-    @ViewChild('gaugePointer') gaugePointer: ElementRef;
-    @ViewChild('gaugeSecPointer') gaugeSecPointer: ElementRef;
-    @ViewChild('gaugeContainer') gaugeContainer: ElementRef;
+    @ViewChild('gauge', {static: true}) gauge: ElementRef;
+    @ViewChild('gaugePointer', {static: true}) gaugePointer: ElementRef;
+    @ViewChild('gaugeSecPointer', {static: true}) gaugeSecPointer: ElementRef;
+    @ViewChild('gaugeContainer', {static: true}) gaugeContainer: ElementRef;
     @Input() maxGraduation: number;
     @Input() maxValue: number;
     @Input() value: number;
@@ -66,9 +66,9 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    public setValue(_value) {
+    public setValue(val) {
 
-        let value = _value * 100;
+        let value = val * 100;
         const ratio = this.maxValue / this.maxGraduation;
 
         if (value < 0) {
@@ -85,9 +85,9 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    public setSecValue(_value) {
+    public setSecValue(val) {
 
-        let value = _value * 100;
+        let value = val * 100;
         const ratio = this.maxSecValue / this.maxGraduation;
 
         if (value < 0) {
@@ -170,16 +170,16 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    private drawGraduations(_gradNumber: number, _main: number) {
+    private drawGraduations(gradNumber: number, main: number) {
 
-        _gradNumber = _gradNumber + 1;
+        gradNumber = gradNumber + 1;
 
-        if (_gradNumber < 2) {
+        if (gradNumber < 2) {
             throw new Error('Analog gauge can\'t have less than 2 graduation');
         }
 
         const useableRange = this.from - this.to;
-        const rangePart = useableRange / (_gradNumber - 1);
+        const rangePart = useableRange / (gradNumber - 1);
 
         const circleRadius = this.radius - this.outCircleWidth;
         const secCircleRadius = this.radius - this.graduateLength;
@@ -197,17 +197,17 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         this.ctx.stroke();
 
         const current = this.to;
-        for (let i = 0; i < _gradNumber; i++) {
+        for (let i = 0; i < gradNumber; i++) {
 
             let speedText = '';
             let style = 'normal';
 
-            if (i % _main === 0) {
+            if (i % main === 0) {
                 style = 'main';
-                speedText = (this.maxGraduation - ((this.maxGraduation * i) / (_gradNumber - 1))).toString();
+                speedText = (this.maxGraduation - ((this.maxGraduation * i) / (gradNumber - 1))).toString();
             }
 
-            if (i === _gradNumber - 1) {
+            if (i === gradNumber - 1) {
                 style = 'main';
                 speedText = '0';
             }
@@ -217,14 +217,14 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    private drawScale(_angle, _type: string, _speedText?: string) {
+    private drawScale(angle, type: string, speedText?: string) {
 
         const circleRadius = this.radius - this.outCircleWidth + 2;
         const secCircleRadius = this.radius - this.graduateLength - 2;
         const subCircleRadius = this.radius - (this.graduateLength / 2) + 2;
         const mainGraduateAngle = 2;
 
-        switch (_type) {
+        switch (type) {
             case 'normal':
 
                 this.ctx.beginPath();
@@ -232,16 +232,16 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
                 this.ctx.strokeStyle = '#000000';
                 this.ctx.beginPath();
                 this.ctx.moveTo(
-                    this.radius + secCircleRadius * Math.sin((_angle * Math.PI / 180)),
-                    this.radius + secCircleRadius * Math.cos((_angle * Math.PI / 180))
+                    this.radius + secCircleRadius * Math.sin((angle * Math.PI / 180)),
+                    this.radius + secCircleRadius * Math.cos((angle * Math.PI / 180))
                 );
                 this.ctx.lineTo(
-                    this.radius + subCircleRadius * Math.sin((_angle * Math.PI / 180)),
-                    this.radius + subCircleRadius * Math.cos((_angle * Math.PI / 180))
+                    this.radius + subCircleRadius * Math.sin((angle * Math.PI / 180)),
+                    this.radius + subCircleRadius * Math.cos((angle * Math.PI / 180))
                 );
                 this.ctx.stroke();
 
-            break;
+                break;
             case 'main':
 
                 this.ctx.beginPath();
@@ -249,36 +249,36 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
                 this.ctx.strokeStyle = '#000000';
                 this.ctx.beginPath();
                 this.ctx.moveTo(
-                    this.radius + secCircleRadius * Math.sin((_angle * (Math.PI / 180))),
-                    this.radius + secCircleRadius * Math.cos((_angle * (Math.PI / 180)))
+                    this.radius + secCircleRadius * Math.sin((angle * (Math.PI / 180))),
+                    this.radius + secCircleRadius * Math.cos((angle * (Math.PI / 180)))
                 );
                 this.ctx.lineTo(
-                    this.radius + circleRadius * Math.sin((_angle * (Math.PI / 180))),
-                    this.radius + circleRadius * Math.cos((_angle * (Math.PI / 180)))
+                    this.radius + circleRadius * Math.sin((angle * (Math.PI / 180))),
+                    this.radius + circleRadius * Math.cos((angle * (Math.PI / 180)))
                 );
                 this.ctx.stroke();
 
-                this.setMainGraduationValue(_angle, _speedText);
+                this.setMainGraduationValue(angle, speedText);
 
-            break;
+                break;
 
         }
     }
 
-    private setMainGraduationValue(_angle, _speedText) {
+    private setMainGraduationValue(angle, speedText) {
 
-        if (_speedText % this.parityCheck === 0) {
+        if (speedText % this.parityCheck === 0) {
 
             const circleRadius = this.radius - this.radius * 28 / 100;
             const fontSize = this.radius * 0.10;
             const textWidth = fontSize / 10 * 4 * 3;
 
-            const topPos = this.radius + circleRadius * Math.cos((_angle * (Math.PI / 180))) + (fontSize / 2);
-            const leftPos = this.radius + circleRadius * Math.sin((_angle * (Math.PI / 180)));
+            const topPos = this.radius + circleRadius * Math.cos((angle * (Math.PI / 180))) + (fontSize / 2);
+            const leftPos = this.radius + circleRadius * Math.sin((angle * (Math.PI / 180)));
 
             this.ctx.font = fontSize + 'px Pathway Gothic One';
             this.ctx.textAlign = 'center';
-            this.ctx.fillText(_speedText, leftPos, topPos);
+            this.ctx.fillText(speedText, leftPos, topPos);
 
         }
 
@@ -293,15 +293,15 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         const outLineWidth = this.graduateLength / 2 - 16;
         const inLineWidth = this.graduateLength / 2;
 
-        for (let i = 0; i < zonesNames.length; i++) {
+        for (const zone of zonesNames) {
 
-            const start = this.findAngleByValue(this.zones[zonesNames[i]][0]);
-            const end = this.findAngleByValue(this.zones[zonesNames[i]][1]);
-            const cireclePos = (this.zones[zonesNames[i]][2]) ? inCircleRadius : outCircleRadius;
+            const start = this.findAngleByValue(this.zones[zone][0]);
+            const end = this.findAngleByValue(this.zones[zone][1]);
+            const cireclePos = (this.zones[zone][2]) ? inCircleRadius : outCircleRadius;
 
             this.ctx.beginPath();
-            this.ctx.strokeStyle = zonesNames[i];
-            this.ctx.lineWidth = (this.zones[zonesNames[i]][2]) ? inLineWidth : outLineWidth;
+            this.ctx.strokeStyle = zone;
+            this.ctx.lineWidth = (this.zones[zone][2]) ? inLineWidth : outLineWidth;
             this.ctx.arc(circleRadius, circleRadius, cireclePos, start, end);
             this.ctx.stroke();
         }
@@ -313,11 +313,11 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         const circleRadius = this.radius - this.outCircleWidth + 2;
         const secCircleRadius = this.radius - this.graduateLength - 2;
 
-        for (let i = 0; i < mainGraduationColor.length; i++) {
-            const angle = this.findAngleByValue(this.specialMainGraduations[mainGraduationColor[i]]);
+        for (const colorZone of mainGraduationColor) {
+            const angle = this.findAngleByValue(this.specialMainGraduations[colorZone]);
             this.ctx.beginPath();
             this.ctx.lineWidth = 20;
-            this.ctx.strokeStyle = mainGraduationColor[i];
+            this.ctx.strokeStyle = colorZone;
             this.ctx.beginPath();
             this.ctx.moveTo(
                 this.radius - secCircleRadius * Math.sin((angle * (Math.PI / 180))),
@@ -331,13 +331,13 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         }
     }
 
-    private findAngleByValue(_value) {
+    private findAngleByValue(value) {
         const useableRange = this.from - this.to;
-        const angle = (((_value * useableRange) / this.maxGraduation)  + this.to + 90) * (Math.PI / 180);
+        const angle = (((value * useableRange) / this.maxGraduation)  + this.to + 90) * (Math.PI / 180);
         return angle;
     }
 
-    private drawPointers(_ctx, _color) {
+    private drawPointers(ctx, color) {
 
         const pointerRadius = this.radius * 0.70;
         const pointerWidth = this.radius * 0.022;
@@ -345,29 +345,29 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         const baseWidth = pointerWidth * 4;
         const baseLength = pointerWidth * 6;
 
-        _ctx.beginPath();
+        ctx.beginPath();
 
-        _ctx.moveTo(this.radius, this.radius);
+        ctx.moveTo(this.radius, this.radius);
 
         // Recule par rapport au centre
         const x = this.radius + backReport * Math.cos((this.from - 180) * (Math.PI / 180));
         const y = this.radius + backReport * Math.sin((this.from - 180) * (Math.PI / 180));
-        _ctx.lineTo(y, x);
+        ctx.lineTo(y, x);
 
         // Vers le haut
-        _ctx.lineTo(
+        ctx.lineTo(
             y + pointerWidth * Math.sin((this.from - 90) * (Math.PI / 180)),
             x + pointerWidth * Math.cos((this.from - 90) * (Math.PI / 180))
         );
 
         // Pointe
-        _ctx.lineTo(
+        ctx.lineTo(
             this.radius + pointerRadius * Math.sin((this.from) * (Math.PI / 180)),
             this.radius + pointerRadius * Math.cos((this.from) * (Math.PI / 180))
         );
 
         // Vers le bas
-        _ctx.lineTo(
+        ctx.lineTo(
             y + pointerWidth * Math.sin((this.from + 90) * (Math.PI / 180)),
             x + pointerWidth * Math.cos((this.from + 90) * (Math.PI / 180))
         );
@@ -383,7 +383,7 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         const yArcBAse = this.radius  + (backReport + (baseLength * 0.75)) * Math.sin((this.from - 180) * (Math.PI / 180));
 
         // Vers le bas
-        _ctx.quadraticCurveTo(
+        ctx.quadraticCurveTo(
             yArcBAse + pointerWidth * Math.sin((this.from + 90) * (Math.PI / 180)),
             xArcBase + pointerWidth * Math.cos((this.from + 90) * (Math.PI / 180)),
             yBase + baseWidth * Math.sin((this.from + 90) * (Math.PI / 180)),
@@ -391,7 +391,7 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         );
 
         // Transversal base vers le haut
-        _ctx.quadraticCurveTo(
+        ctx.quadraticCurveTo(
             yBaseArc,
             xBaseArc,
             yBase + baseWidth * Math.sin((this.from - 90) * (Math.PI / 180)),
@@ -399,16 +399,16 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         );
 
         // Retour Vers le haut
-        _ctx.quadraticCurveTo(
+        ctx.quadraticCurveTo(
             yArcBAse + pointerWidth * Math.sin((this.from - 90) * (Math.PI / 180)),
             xArcBase + pointerWidth * Math.cos((this.from - 90) * (Math.PI / 180)),
             y + pointerWidth * Math.sin((this.from - 90) * (Math.PI / 180)),
             x + pointerWidth * Math.cos((this.from - 90) * (Math.PI / 180))
         );
 
-        _ctx.closePath();
-        _ctx.fillStyle = _color;
-        _ctx.fill();
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
 
         const radgrad = this.ctx.createRadialGradient(
             this.radius,
@@ -421,10 +421,10 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         radgrad.addColorStop(1, '#666');
         radgrad.addColorStop(1, '#fff');
 
-        _ctx.beginPath();
-        _ctx.arc(this.radius, this.radius, pointerWidth * 3, 0, Math.PI * 2, true);
-        _ctx.fillStyle = radgrad;
-        _ctx.fill();
+        ctx.beginPath();
+        ctx.arc(this.radius, this.radius, pointerWidth * 3, 0, Math.PI * 2, true);
+        ctx.fillStyle = radgrad;
+        ctx.fill();
 
     }
 

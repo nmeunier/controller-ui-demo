@@ -6,11 +6,11 @@ import { Component, OnInit, AfterContentInit, Input, Output, EventEmitter, ViewC
   styleUrls: ['./classic-direction-handle.component.css']
 })
 export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit {
-  private _value = 0;
-  private _coefValue = 0;
+  private internalValue = 0;
+  private coefValue = 0;
 
-  @ViewChild('ctrlDirectionCtn') ctrlDirectionCtn: ElementRef;
-  @ViewChild('handle') handle: ElementRef;
+  @ViewChild('ctrlDirectionCtn', {static: true}) ctrlDirectionCtn: ElementRef;
+  @ViewChild('handle', {static: true}) handle: ElementRef;
   @Input()steps?;
   @Input()beginFrom?;
   @Input()graduations?: Array<string>;
@@ -19,16 +19,16 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
   @Output() valueChange = new EventEmitter();
   @Input()
   get value() {
-      return this._value + this._coefValue;
+      return this.internalValue + this.coefValue;
   }
 
   set value(val: number) {
 
-      val = (Math.round(val * 100) / 100) - this._coefValue;
+      val = (Math.round(val * 100) / 100) - this.coefValue;
 
-      if (val !== this._value) {
-          this._value = val;
-          this.valueChange.emit(this._value + this._coefValue);
+      if (val !== this.internalValue) {
+          this.internalValue = val;
+          this.valueChange.emit(this.internalValue + this.coefValue);
       }
   }
 
@@ -60,12 +60,12 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
   ngOnInit() {
 
     if (this.beginFrom) {
-      this._coefValue = Number.parseInt(this.beginFrom);
-      this._value = this._value - this._coefValue;
+      this.coefValue = Number.parseInt(this.beginFrom, 10);
+      this.internalValue = this.internalValue - this.coefValue;
     }
 
     this.valueChange.subscribe(() => {
-      this.rotate = (this.angleValue * (this._value - 1));
+      this.rotate = (this.angleValue * (this.internalValue - 1));
     });
 
 }
@@ -78,20 +78,20 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
 
       const containerPos = this.ctrlDirectionCtn.nativeElement.getBoundingClientRect();
 
-    if (containerPos.width < containerPos.height) {
+      if (containerPos.width < containerPos.height) {
       this.containerWidth = this.containerHeight = containerPos.width;
     } else {
       this.containerWidth = this.containerHeight = containerPos.height;
     }
 
-    this.cursorHeight = this.containerWidth / 3;
-    this.handleHeight = this.containerWidth / 3;
-    this.handleWidth = this.containerWidth;
-    this.handlePosY = this.containerWidth / 3;
-    this.handleRotateAxisX = this.handleWidth - (this.handleHeight / 2);
-    this.handleRotateAxisY = this.handleHeight / 2;
-    this.y = this._value * this.cursorHeight;
-    this.rotate = (this.angleValue * (this._value - 1));
+      this.cursorHeight = this.containerWidth / 3;
+      this.handleHeight = this.containerWidth / 3;
+      this.handleWidth = this.containerWidth;
+      this.handlePosY = this.containerWidth / 3;
+      this.handleRotateAxisX = this.handleWidth - (this.handleHeight / 2);
+      this.handleRotateAxisY = this.handleHeight / 2;
+      this.y = this.internalValue * this.cursorHeight;
+      this.rotate = (this.angleValue * (this.internalValue - 1));
 
   }
 
@@ -115,10 +115,10 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
     }
 
     const currentStep = Math.round(newY / (this.containerHeight / this.steps));
-    if (this._value !== currentStep) {
+    if (this.internalValue !== currentStep) {
       this.y = currentStep * this.cursorHeight;
-      this.value = currentStep + this._coefValue;
-      this.rotate = (this.angleValue * (this._value - 1));
+      this.value = currentStep + this.coefValue;
+      this.rotate = (this.angleValue * (this.internalValue - 1));
     }
 
   }
