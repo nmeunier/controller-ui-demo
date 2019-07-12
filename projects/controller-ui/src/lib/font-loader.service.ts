@@ -14,47 +14,47 @@ export class FontLoaderService {
         this.onFontReady = new EventEmitter();
     }
 
-    public load(_fontName: string, _fontProvider: string): Promise<string> {
+    public load(fontName: string, fontProvider: string): Promise<string> {
 
-        if (typeof this.availableFont[_fontName] === 'undefined') {
-            this.availableFont[_fontName] = false; // False flag = loading
-            return this.loadFont(_fontName, _fontProvider);
-        } else if (this.availableFont[_fontName] === true) {
-            return Promise.resolve(_fontName);
+        if (typeof this.availableFont[fontName] === 'undefined') {
+            this.availableFont[fontName] = false; // False flag = loading
+            return this.loadFont(fontName, fontProvider);
+        } else if (this.availableFont[fontName] === true) {
+            return Promise.resolve(fontName);
         } else {
-            const p: Promise<string> = new Promise((_resolve) => {
-                this.onFontReady.subscribe((_fName) => {
-                    if (_fName === _fontName) {
-                        return _resolve(_fontName);
+            const p: Promise<string> = new Promise((resolve) => {
+                this.onFontReady.subscribe((fName) => {
+                    if (fName === fontName) {
+                        return resolve(fontName);
                     }
                 });
             });
-            this.waitLoad[_fontName] = p;
+            this.waitLoad[fontName] = p;
             return p;
         }
 
     }
 
 
-    private loadFont(_fontName: string, _fontProvider: string): Promise<string> {
-        return new Promise((_resolve, _reject) => {
+    private loadFont(fontName: string, fontProvider: string): Promise<string> {
+        return new Promise((resolve) => {
             const fontLoaderConfig = {
                 timeout: 2000,
                 active: () => {
-                    this.onFontLoaded(_fontName);
-                    _resolve(_fontName);
+                    this.onFontLoaded(fontName);
+                    resolve(fontName);
                 }
             };
-            fontLoaderConfig[_fontProvider] = {
-                families: [_fontName]
+            fontLoaderConfig[fontProvider] = {
+                families: [fontName]
             };
 
             WebFont.load(fontLoaderConfig);
         });
     }
 
-    private onFontLoaded(_fontName: string) {
-        this.onFontReady.emit(_fontName);
-        return this.availableFont[_fontName] = true;
+    private onFontLoaded(fontName: string) {
+        this.onFontReady.emit(fontName);
+        return this.availableFont[fontName] = true;
     }
 }

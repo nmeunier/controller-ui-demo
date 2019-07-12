@@ -1,42 +1,67 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClassicBrakeGaugeComponent } from './classic-brake-gauge.component';
+import { FontLoaderService } from '../../font-loader.service';
+import { MockFontLoader } from '../../test/MockFontLoader';
 
 describe('ClassicBrakeGaugeComponent', () => {
-  let fixture;
-  it('should create', () => {
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClassicBrakeGaugeComponent ]
+      declarations: [ClassicBrakeGaugeComponent],
+      providers: [
+        { provide: FontLoaderService, useClass: MockFontLoader },
+      ]
     });
-    fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
-    fixture.flex = false;
-    fixture.size = '300px';
-    fixture.unit = 'kPa';
-    fixture.maxGraduation = 1000;
-    fixture.maxValue = 480;
-    fixture.value = 0;
-    fixture.maxValue = 800;
-    fixture.value = 500;
+
+    TestBed.compileComponents();
+  }));
+
+  it('should create', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+
+    testComponent.flex = false;
+    testComponent.size = '300px';
+    testComponent.unit = 'kPa';
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.value = 0;
+    testComponent.maxValue = 800;
+    testComponent.value = 500;
     const component = fixture.componentInstance;
+    component.ngAfterContentInit( );
+    component.ngAfterViewInit( );
+    fixture.detectChanges( );
     expect(component).toBeDefined();
   });
+
   it('should have <canvas #gauge>', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
     const cmp: HTMLElement = fixture.nativeElement;
     const gauge = cmp.querySelector('canvas');
-    console.log(gauge);
     expect(gauge).not.toBeNull();
   });
+
   it('should have <canvas #gaugePointer>', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
     const cmp: HTMLElement = fixture.nativeElement;
     const gaugePointer = cmp.querySelector('.pointer-primary');
-    console.log(gaugePointer);
     expect(gaugePointer).not.toBeNull();
   });
-  // TODO gaugeSecPointer
+
   it('should have <canvas #gaugeSecPointer>', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
     const cmp: HTMLElement = fixture.nativeElement;
     const gaugePointer = cmp.querySelector('.pointer-secondary');
-    console.log(gaugePointer);
     expect(gaugePointer).not.toBeNull();
   });
+
+  it('should have <canvas #gaugeSecPointer>', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const cmp: HTMLElement = fixture.nativeElement;
+    const gaugePointer = cmp.querySelector('.pointer-secondary');
+    expect(gaugePointer).not.toBeNull();
+  });
+
 });

@@ -144,9 +144,7 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
 
     public onPan(event: any): void {
         event.preventDefault();
-
         const currentAngle = this.getAngle(event.center.x - this.posX, event.center.y - this.posY);
-
         const curValue = (this.steps + Math.round((currentAngle / (this.stepAngle / 2)) / 2));
         if (curValue !== (this.value * this.steps)) {
             this.value = curValue / this.steps;

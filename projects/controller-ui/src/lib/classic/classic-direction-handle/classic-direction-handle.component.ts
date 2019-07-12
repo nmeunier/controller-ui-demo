@@ -64,6 +64,10 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
       this.internalValue = this.internalValue - this.coefValue;
     }
 
+    if (! this.steps) {
+      this.steps = 3;
+    }
+
     this.valueChange.subscribe(() => {
       this.rotate = (this.angleValue * (this.internalValue - 1));
     });
@@ -79,10 +83,10 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
       const containerPos = this.ctrlDirectionCtn.nativeElement.getBoundingClientRect();
 
       if (containerPos.width < containerPos.height) {
-      this.containerWidth = this.containerHeight = containerPos.width;
-    } else {
-      this.containerWidth = this.containerHeight = containerPos.height;
-    }
+        this.containerWidth = this.containerHeight = containerPos.width;
+      } else {
+        this.containerWidth = this.containerHeight = containerPos.height;
+      }
 
       this.cursorHeight = this.containerWidth / 3;
       this.handleHeight = this.containerWidth / 3;

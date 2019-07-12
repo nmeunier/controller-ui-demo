@@ -1,31 +1,47 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
 
 import { ClassicSpeedGaugeComponent } from './classic-speed-gauge.component';
 import { FontLoaderService } from '../../font-loader.service';
+import { MockFontLoader } from '../../test/MockFontLoader';
 
 describe('ClassicSpeedGaugeComponent', () => {
-  let fixture;
-  it('should create', () => {
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClassicSpeedGaugeComponent ]
+      declarations: [ClassicSpeedGaugeComponent],
+      providers: [
+        { provide: FontLoaderService, useClass: MockFontLoader },
+      ]
     });
-    fixture = TestBed.createComponent(ClassicSpeedGaugeComponent);
-    fixture.unit = 'Km/h';
-    fixture.maxSpeed = 120;
-    fixture.value = 80;
-    const component = fixture.componentInstance;
-    expect(component).toBeDefined();
+
+    TestBed.compileComponents();
+  }));
+
+  it('should create', () => {
+    const fixture = TestBed.createComponent(ClassicSpeedGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.unit = 'Km/h';
+    testComponent.maxSpeed = 120;
+    testComponent.value = 0;
+    fixture.detectChanges();
+    testComponent.value = 80;
+    expect(testComponent).toBeDefined();
   });
+
   it('should have <canvas #gauge>', () => {
+    const fixture = TestBed.createComponent(ClassicSpeedGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
     const cmp: HTMLElement = fixture.nativeElement;
     const gauge = cmp.querySelector('canvas');
-    console.log(gauge);
     expect(gauge).not.toBeNull();
   });
   it('should have <canvas #gaugePointer>', () => {
+    const fixture = TestBed.createComponent(ClassicSpeedGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
     const cmp: HTMLElement = fixture.nativeElement;
     const gaugePointer = cmp.querySelector('.gauge-pointer');
-    console.log(gaugePointer);
     expect(gaugePointer).not.toBeNull();
   });
 });
