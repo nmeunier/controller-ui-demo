@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-ci": "ng build controller-ui --prod",
+    "build-ci": "ng build controller-ui",
     "test-ci": "ng test controller-ui --watch=false --browsers=ChromeHeadless",
     "test": "ng test",
     "lint": "ng lint",
