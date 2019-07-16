@@ -1,0 +1,20 @@
+sudo: required
+addons:
+  chrome: stable
+language: node_js
+node_js: 10
+script:
+- npm run test-ci
+- npm run build-ci
+before_deploy:  
+- cd dist/controller-ui
+deploy:
+  provider: npm
+  email: contact@cabview.io
+  skip_cleanup: true
+  api_key:
+    secure: UMqZcIzKo383EZb+VCaJNZckENPc7OlmfA7CDex6I7HcCgPgtvLthO/UzNlO49ZqbSCI1uB0BWcsp4kY9WziG9ZLYDE2MVY5GJNDT/cAakaOmE4tEdsB3An9DSNcyhdkPNy6T/R/Sk8MQ7PqqAxfD/6iJhxiaKajfAbt/xVVsG3ba6Xr7htsStD9AHdm9MAhv3nGOFVeK5LnTX8iE8gFZbV8Pxayeb1yWmbftxcKSmCv8YKUyiglBDAhfDcZOSjWgOg0CvPODJh1gAYGOt0lF8q948/JZc7eNuVMuSiG8tU3VD/zR89tew4SQxpZf0btFNlogKJY2/Igkny6KF5f0Y6vbIxOOUGet1EKu17BcBxu5CWA+RtIsQsBJDxIyxN8EtJPIdlcttAiL25yaEJcnGqF3hOyfQqRYZhAt7ypm32DgExlTJtFV7keWGL7DfCJytyvYZ1xqwz+N9SqrJYXfvqikdd7W2f6U+ZaXjXSqfHLRx27NfG/ZbHRcc+zy7quxY6DW6xZsUGx3Fe9cUEyqStK3RWMlXk9eTYdcfDeHsJu17kHvWsaCH2YZsUU2aYcZ16z8FUb1PdcDywhOyzzee8OB/F+m5x3/NchF97twxCTkvXD1GzQcAp3p75kE/EdEsHN+Q1CMagJPAwrD94hjPCXIACcQEq15Y24ViotaT8=
+  on:
+    tags: true
+    repo: nmeunier/controller-ui
+    branch: master
