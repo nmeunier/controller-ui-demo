@@ -24,7 +24,7 @@ describe('ClassicToggleSwitchComponent', () => {
   });
 
   it('should render label in a class="switch-label" tag', async(() => {
-     fixture = TestBed.createComponent(ClassicToggleSwitchComponent);
+    fixture = TestBed.createComponent(ClassicToggleSwitchComponent);
     component = fixture.componentInstance;
     component.label = 'Test Label';
     fixture.detectChanges();

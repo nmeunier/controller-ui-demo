@@ -5,6 +5,7 @@ language: node_js
 node_js: 10
 script:
 - npm run test-ci
+- npm run report-coverage-ci
 - npm run build-ci
 before_deploy:  
 - cd dist/controller-ui

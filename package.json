@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "build-ci": "ng build controller-ui",
-    "test-ci": "ng test controller-ui --watch=false --browsers=ChromeHeadless",
+    "test-ci": "ng test controller-ui --code-coverage --watch=false --browsers=ChromeHeadless",
+    "report-coverage-ci": "cat ./coverage/controller-ui/lcov.info | codecov",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -39,6 +40,7 @@
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "codecov": "^3.5.0",
     "codelyzer": "^5.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",

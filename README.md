@@ -1,7 +1,9 @@
 # Controller Ui
 
 [![NPM version](https://img.shields.io/npm/v/controller-ui.svg)](https://npmjs.org/package/controller-ui)
+[![codecov](https://codecov.io/gh/nmeunier/controller-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/nmeunier/controller-ui)
 [![Build Status](https://travis-ci.org/nmeunier/controller-ui.svg?branch=master)](https://travis-ci.org/nmeunier/controller-ui)
+
 
 This project is the Angular project for build the [controller-ui](https://www.npmjs.com/package/controller-ui) library.
 
