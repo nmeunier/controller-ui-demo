@@ -45,4 +45,12 @@ describe('ClassicRegulatorHandleComponent', () => {
     fixture.detectChanges();
     expect(component.value).toEqual(1);
   });
+
+  it('should change graduations', () => {
+    component.steps = 3;
+    component.graduations = '012';
+    component.ngOnChanges();
+    fixture.detectChanges();
+    expect(component.steps).toEqual(3);
+  });
 });
