@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // import { ClassicModule } from 'controller-ui';
@@ -31,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSliderModule,
     MatSlideToggleModule,
     MatSelectModule,
-    ClassicModule
+    ClassicModule,
+    HammerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
