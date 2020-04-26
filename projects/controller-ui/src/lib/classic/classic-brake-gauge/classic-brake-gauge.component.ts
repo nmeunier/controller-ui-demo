@@ -119,12 +119,14 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
 
     private redraw() {
 
-        this.drawContainer();
-        this.drawZones();
-        this.drawGraduations(50, 5);
-        this.drawSpecialMainGraduations();
-        this.drawPointers(this.secPointerCtx, '#CC0000');
-        this.drawPointers(this.pointerCtx, '#000000');
+        if (this.ctx) {
+            this.drawContainer();
+            this.drawZones();
+            this.drawGraduations(50, 5);
+            this.drawSpecialMainGraduations();
+            this.drawPointers(this.secPointerCtx, '#CC0000');
+            this.drawPointers(this.pointerCtx, '#000000');
+        }
 
     }
 
