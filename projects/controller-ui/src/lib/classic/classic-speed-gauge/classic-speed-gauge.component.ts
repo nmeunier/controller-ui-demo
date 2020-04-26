@@ -1,11 +1,10 @@
-import { Component, ViewChild, Input, ElementRef, AfterViewInit, AfterContentInit, OnChanges, EventEmitter } from '@angular/core';
-import { FontLoaderService } from '../../font-loader.service';
+import { Component, ViewChild, Input, ElementRef, AfterViewInit, AfterContentInit, OnChanges } from '@angular/core';
 
 
 @Component({
   selector: 'cui-classic-speed-gauge',
   templateUrl: './classic-speed-gauge.component.html',
-  styleUrls: ['./classic-speed-gauge.component.css']
+  styleUrls: ['../../styles/font.css', './classic-speed-gauge.component.css']
 })
 export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentInit, OnChanges {
     @ViewChild('gauge', {static: true}) gauge: ElementRef;
@@ -20,8 +19,6 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
     private outCircleWidth = 2; // Gauge border
     private graduateShadow = 5; // Shadow between graduation and gauge center
     private graduateLength = this.radius * 16 / 100;
-    private fontReady = false;
-    private onFontReady: EventEmitter<boolean>;
     private originalMaxSpeed = this.maxSpeed;
     private originalUnit = this.unit;
 
@@ -33,19 +30,7 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
     private ctx: CanvasRenderingContext2D;
     private pointerCtx: CanvasRenderingContext2D;
 
-    constructor(protected fontLoader: FontLoaderService) {
-
-        this.onFontReady = new EventEmitter();
-        this.fontLoader.load('Pathway Gothic One', 'google').then(() => {
-          this.fontReady = true;
-          this.onFontReady.emit(true);
-        }).catch(() => {
-            // Try to draw without font
-            this.fontReady = true;
-            this.onFontReady.emit(false);
-        });
-
-    }
+    constructor() { }
 
     public setValue(value) {
 
@@ -92,14 +77,8 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
         this.drawContainer();
         this.drawPointer();
         this.drawGraduations(this.maxSpeed / 2, 10, 5);
+        this.drawText();
 
-        if (this.fontReady) {
-            this.drawText();
-        } else {
-            this.onFontReady.subscribe(() => {
-                this.drawText();
-            });
-        }
 
     }
 

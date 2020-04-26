@@ -18,11 +18,6 @@ Import hammerjs in your Angular project by adding this line in your src/main.js
 import 'hammerjs';
 ```
 
-* Install Web Font Loader 
-```
-npm install --save webfontloader
-```
-
 ## Installation
 
 ```

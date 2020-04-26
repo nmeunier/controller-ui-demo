@@ -1,6 +1,6 @@
 {
   "name": "controller-ui",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "GPL-3.0-or-later",
   "description": "Angular Component library for building train cockpit",
   "homepage": "https://github.com/nmeunier/controller-ui",
@@ -23,8 +23,7 @@
   },
   "peerDependencies": {
     "@angular/common": "^9.1.3",
-    "@angular/core": "^9.1.3",
-    "webfontloader": "^1.6.28"
+    "@angular/core": "^9.1.3"
   },
   "dependencies": {
   }

@@ -1,10 +1,9 @@
-import { Component, AfterViewInit, AfterContentInit, OnChanges, ViewChild, Input, ElementRef, EventEmitter } from '@angular/core';
-import { FontLoaderService } from '../../font-loader.service';
+import { Component, AfterViewInit, AfterContentInit, OnChanges, ViewChild, Input, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'cui-classic-brake-gauge',
     templateUrl: './classic-brake-gauge.component.html',
-    styleUrls: ['./classic-brake-gauge.component.css']
+    styleUrls: ['../../styles/font.css', './classic-brake-gauge.component.css']
 })
 export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentInit, OnChanges {
 
@@ -35,8 +34,6 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
     private outCircleWidth = 5; // Gauge border
     private graduateShadow = 5; // Shadow between graduation and gauge center
     private graduateLength = this.radius * 16 / 100;
-    private fontReady = false;
-    private onFontReady: EventEmitter<boolean>;
     private originalMaxGraduation = this.maxGraduation;
     private originalUnit = this.unit;
     private originalMaxValue = this.maxValue;
@@ -52,19 +49,7 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
     private pointerCtx: CanvasRenderingContext2D;
     private secPointerCtx: CanvasRenderingContext2D;
 
-    constructor(protected fontLoader: FontLoaderService) {
-
-        this.onFontReady = new EventEmitter();
-        this.fontLoader.load('Pathway Gothic One', 'google').then(() => {
-            this.fontReady = true;
-            this.onFontReady.emit(true);
-        }).catch(() => {
-            // Try to draw without font
-            this.fontReady = true;
-            this.onFontReady.emit(false);
-        });
-
-    }
+    constructor() { }
 
     public setValue(val) {
 
@@ -134,18 +119,13 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
 
     private redraw() {
 
-        if (this.fontReady) {
-            this.drawContainer();
-            this.drawZones();
-            this.drawGraduations(50, 5);
-            this.drawSpecialMainGraduations();
-            this.drawPointers(this.secPointerCtx, '#CC0000');
-            this.drawPointers(this.pointerCtx, '#000000');
-        } else {
-            this.onFontReady.subscribe(() => {
-                this.redraw();
-            });
-        }
+        this.drawContainer();
+        this.drawZones();
+        this.drawGraduations(50, 5);
+        this.drawSpecialMainGraduations();
+        this.drawPointers(this.secPointerCtx, '#CC0000');
+        this.drawPointers(this.pointerCtx, '#000000');
+
     }
 
     private drawContainer() {

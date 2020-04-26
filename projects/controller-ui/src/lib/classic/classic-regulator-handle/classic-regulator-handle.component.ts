@@ -4,7 +4,7 @@ import { Component, OnInit, OnChanges, AfterContentInit, ViewChild,
 @Component({
   selector: 'cui-classic-regulator-handle',
   templateUrl: './classic-regulator-handle.component.html',
-  styleUrls: ['./classic-regulator-handle.component.css']
+  styleUrls: ['../../styles/font.css', './classic-regulator-handle.component.css']
 })
 export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, AfterContentInit {
 

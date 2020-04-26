@@ -3,17 +3,12 @@ import {Component, DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 
 import { ClassicSpeedGaugeComponent } from './classic-speed-gauge.component';
-import { FontLoaderService } from '../../font-loader.service';
-import { MockFontLoader } from '../../test/MockFontLoader';
 
 describe('ClassicSpeedGaugeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ClassicSpeedGaugeComponent],
-      providers: [
-        { provide: FontLoaderService, useClass: MockFontLoader },
-      ]
+      declarations: [ClassicSpeedGaugeComponent]
     });
 
     TestBed.compileComponents();

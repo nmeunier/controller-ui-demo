@@ -1,17 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClassicBrakeGaugeComponent } from './classic-brake-gauge.component';
-import { FontLoaderService } from '../../font-loader.service';
-import { MockFontLoader } from '../../test/MockFontLoader';
 
 describe('ClassicBrakeGaugeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ClassicBrakeGaugeComponent],
-      providers: [
-        { provide: FontLoaderService, useClass: MockFontLoader },
-      ]
+      declarations: [ClassicBrakeGaugeComponent]
     });
 
     TestBed.compileComponents();
