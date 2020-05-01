@@ -1,4 +1,4 @@
-<div class="toggle-container" #toggleCtn (panstart)="onPanStart($event)" (panmove)="onPan($event)">
+<div class="toggle-container" style="font-family: 'Pathway Gothic One';" #toggleCtn (panstart)="onPanStart($event)" (panmove)="onPan($event)">
   <div class="switch-button" #switchBtn [ngClass]="(value)?'switch-button-on':'switch-button-off'"  [ngStyle]="{'height': cursorHeight + 'px', 'top': y + 'px'}"></div>
   <div class="switch-base" [ngClass]="(value)?'switch-base-on':'switch-base-off'"></div>
   <div class="switch-label" [ngClass]="(labelPosition === 'top')?'switch-label-top':'switch-label-bottom'">{{label}}</div>
