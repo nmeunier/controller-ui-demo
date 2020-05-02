@@ -14,6 +14,8 @@ describe('ClassicRegulatorHandleComponent', () => {
     });
     TestBed.compileComponents();
     fixture = TestBed.createComponent(ClassicRegulatorHandleComponent);
+    fixture.nativeElement.style.width = '200px';
+    fixture.nativeElement.height = '200px';
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
@@ -27,7 +29,7 @@ describe('ClassicRegulatorHandleComponent', () => {
     expect(component.value).toEqual(0.5);
   });
 
-  it('should pan', () => {
+  it('should pan 1', () => {
     const handle = fixture.debugElement.query(By.css('[class=ctrl-traction-container]'));
     component.steps = 5;
     component.value = 0;
@@ -46,6 +48,54 @@ describe('ClassicRegulatorHandleComponent', () => {
     expect(component.value).toEqual(1);
   });
 
+  it('should pan 2', () => {
+    const handle = fixture.debugElement.query(By.css('[class=ctrl-traction-container]'));
+    component.steps = 5;
+    component.value = 0;
+    component.graduations = '01234';
+    handle.triggerEventHandler('panstart', {
+        preventDefault: () => {}
+    });
+    handle.triggerEventHandler('panmove', {
+      preventDefault: () => {},
+      center: {
+        x: 10,
+        y: 73
+      }
+    });
+    fixture.detectChanges();
+    expect(component.value).toEqual(0.2);
+  });
+
+  it('should pan 3', () => {
+    const handle = fixture.debugElement.query(By.css('[class=ctrl-traction-container]'));
+    component.handleRotateAxisX = 50;
+    component.handleRotateAxisY = 225;
+    component.steps = 5;
+    component.value = 0;
+    component.graduations = '01234';
+    handle.triggerEventHandler('panstart', {
+        preventDefault: () => {}
+    });
+    handle.triggerEventHandler('panmove', {
+      preventDefault: () => {},
+      center: {
+        x: -10,
+        y: 74
+      }
+    });
+    fixture.detectChanges();
+    expect(component.value).toEqual(1);
+  });
+
+  it('should set graduations', () => {
+    component.steps = 3;
+    component.graduations = '012';
+    component.ngAfterContentInit();
+    fixture.detectChanges();
+    expect(component.steps).toEqual(3);
+  });
+
   it('should change graduations', () => {
     component.steps = 3;
     component.graduations = '012';
@@ -53,4 +103,6 @@ describe('ClassicRegulatorHandleComponent', () => {
     fixture.detectChanges();
     expect(component.steps).toEqual(3);
   });
+
+
 });

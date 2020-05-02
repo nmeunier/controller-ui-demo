@@ -12,10 +12,8 @@ export class DirectionHandleComponent implements AfterContentInit, AfterViewInit
     private handleCtx: CanvasRenderingContext2D;
     public handleWidth = 600;
     public handleHeight = 200;
-    private isInitialized = false;
 
-    constructor(private el: ElementRef) { }
-
+    constructor() { }
 
     ngAfterContentInit() {
         this.handleCtx = this.handle.nativeElement.getContext('2d');
@@ -24,7 +22,6 @@ export class DirectionHandleComponent implements AfterContentInit, AfterViewInit
     ngAfterViewInit() {
         this.drawHandle();
     }
-
 
     drawHandle() {
 

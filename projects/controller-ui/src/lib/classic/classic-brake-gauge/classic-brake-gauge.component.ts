@@ -13,13 +13,69 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
     @ViewChild('gaugeContainer', {static: true}) gaugeContainer: ElementRef;
     @Input() maxGraduation: number;
     @Input() maxValue: number;
-    @Input() value: number;
     @Input() maxSecValue: number;
-    @Input() secValue: number;
     @Input() unit?: string;
     @Input() backgroundColor?: string;
 
+    @Input()
+    get value() {
+        return this.internalValue;
+    }
+
+    set value(val: number) {
+
+        this.internalValue = val;
+        let value = val * 100;
+        const ratio = this.maxValue / this.maxGraduation;
+
+        if (value < 0) {
+            value = 0;
+            this.internalValue = 0;
+        }
+
+        if (value > 100) {
+            value = 100;
+            this.internalValue = 1;
+        }
+
+        const range = this.from - this.to;
+        this.rotateValue = (value * ratio) * range / 100;
+        this.redraw();
+
+    }
+
+
+    @Input()
+    get secValue() {
+        return this.internalSecValue;
+    }
+
+    set secValue(val: number) {
+
+        this.internalSecValue = val;
+        let value = val * 100;
+        const ratio = this.maxSecValue / this.maxGraduation;
+
+        if (value < 0) {
+            value = 0;
+            this.internalSecValue = 0;
+        }
+
+        if (value > 100) {
+            value = 100;
+            this.internalSecValue = 1;
+        }
+
+        const range = this.from - this.to;
+        this.secRotateValue = (value * ratio) * range / 100;
+        this.redraw();
+
+    }
+
+
     public canvasWH = 3000;
+    private internalValue = 0;
+    private internalSecValue = 0;
     private parityCheck = 200;
     private zones = {
         '#73a704': [340, 380, 0], // Zone definition => color:[start, end, (in/out)]
@@ -51,47 +107,8 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
 
     constructor() { }
 
-    public setValue(val) {
-
-        let value = val * 100;
-        const ratio = this.maxValue / this.maxGraduation;
-
-        if (value < 0) {
-            value = 0;
-        }
-
-        if (value > 100) {
-            value = 100;
-        }
-
-        const range = this.from - this.to;
-
-        this.rotateValue = (value * ratio) * range / 100;
-
-    }
-
-    public setSecValue(val) {
-
-        let value = val * 100;
-        const ratio = this.maxSecValue / this.maxGraduation;
-
-        if (value < 0) {
-            value = 0;
-        }
-
-        if (value > 100) {
-            value = 100;
-        }
-
-        const range = this.from - this.to;
-        this.secRotateValue = (value * ratio) * range / 100;
-
-    }
 
     ngOnChanges() {
-        this.setValue(this.value);
-        this.setSecValue(this.secValue);
-
         if ( this.originalMaxGraduation !== this.maxGraduation
             || this.originalUnit !== this.unit
             || this.originalMaxValue !== this.maxValue
@@ -112,8 +129,6 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
     }
 
     ngAfterViewInit() {
-        this.setValue(this.value);
-        this.setSecValue(this.secValue);
         this.redraw();
     }
 
@@ -204,7 +219,6 @@ export class ClassicBrakeGaugeComponent implements AfterViewInit, AfterContentIn
         const circleRadius = this.radius - this.outCircleWidth + 2;
         const secCircleRadius = this.radius - this.graduateLength - 2;
         const subCircleRadius = this.radius - (this.graduateLength / 2) + 2;
-        const mainGraduateAngle = 2;
 
         switch (type) {
             case 'normal':

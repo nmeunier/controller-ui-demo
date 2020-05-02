@@ -8,9 +8,7 @@ import { Component, Input, Output, ViewChild, EventEmitter, ElementRef } from '@
 export class ClassicToggleSwitchComponent {
 
     private internalValue = true;
-    private steps = 2;
     public x = 0;
-    private startY = 0;
     public containerHeight = 200;
     public containerWidth = 100;
     public cursorHeight = this.containerHeight / 3;

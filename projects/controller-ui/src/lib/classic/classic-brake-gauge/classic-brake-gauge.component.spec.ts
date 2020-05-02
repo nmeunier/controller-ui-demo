@@ -59,4 +59,114 @@ describe('ClassicBrakeGaugeComponent', () => {
     expect(gaugePointer).not.toBeNull();
   });
 
+  it('should limit value >= 0', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.maxSecValue = 700;
+    fixture.detectChanges();
+    testComponent.value = -1;
+    expect(testComponent.value).toEqual(0);
+  });
+
+  it('should limit secValue >= 0', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.maxSecValue = 700;
+    fixture.detectChanges();
+    testComponent.secValue = -1;
+    expect(testComponent.secValue).toEqual(0);
+  });
+
+  it('should limit value <= 1', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.maxSecValue = 700;
+    fixture.detectChanges();
+    testComponent.value = 2;
+    expect(testComponent.value).toEqual(1);
+  });
+
+  it('should limit secValue <= 1', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.maxSecValue = 700;
+    fixture.detectChanges();
+    testComponent.secValue = 2;
+    expect(testComponent.secValue).toEqual(1);
+  });
+
+  it('should limit rotation to 0', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.maxSecValue = 700;
+    testComponent.value = 0;
+    fixture.detectChanges();
+    testComponent.value = -1;
+    expect(testComponent.rotateValue).toEqual(0);
+  });
+
+  it('should limit rotation to 110.4', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.maxSecValue = 700;
+    testComponent.value = 0;
+    fixture.detectChanges();
+    testComponent.value = 2;
+    expect(testComponent.rotateValue).toEqual(110.4);
+  });
+
+  it('should limit sec rotation to 161', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.maxSecValue = 700;
+    testComponent.secValue = 0;
+    fixture.detectChanges();
+    testComponent.secValue = 2;
+    expect(testComponent.secRotateValue).toEqual(161);
+  });
+
+  it('should set maxValue', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.unit = 'kPa';
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.maxSecValue = 700;
+    testComponent.value = 0;
+    fixture.detectChanges();
+    testComponent.value = 0.5;
+    testComponent.maxValue = 600;
+    testComponent.ngOnChanges();
+    expect(testComponent.maxValue).toEqual(600);
+  });
+
+  it('should set maxSecValue', () => {
+    const fixture = TestBed.createComponent(ClassicBrakeGaugeComponent);
+    const testComponent = fixture.debugElement.componentInstance;
+    testComponent.unit = 'kPa';
+    testComponent.maxGraduation = 1000;
+    testComponent.maxValue = 480;
+    testComponent.maxSecValue = 700;
+    testComponent.value = 0;
+    fixture.detectChanges();
+    testComponent.value = 0.5;
+    testComponent.maxSecValue = 800;
+    testComponent.ngOnChanges();
+    expect(testComponent.maxSecValue).toEqual(800);
+  });
+
 });

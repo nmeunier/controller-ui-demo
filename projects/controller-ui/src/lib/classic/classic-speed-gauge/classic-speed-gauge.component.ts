@@ -12,8 +12,34 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
     @ViewChild('gaugeContainer', {static: true}) gaugeContainer: ElementRef;
     @Input() maxSpeed: number;
     @Input() unit?: string;
-    @Input() value: number;
 
+    @Input()
+    get value() {
+        return this.internalValue;
+    }
+
+    set value(value: number) {
+
+      this.internalValue = value;
+      value = value * 100;
+
+      if (value < 0) {
+          value = 0;
+          this.internalValue = 0;
+      }
+
+      if (value > 100) {
+          value = 100;
+          this.internalValue = 1;
+      }
+
+      const range = this.from - this.to;
+      this.rotateValue = value * range / 100;
+      this.redraw();
+
+    }
+
+    private internalValue = 0;
     public canvasWH = 800;
     private radius: number = this.canvasWH / 2;
     private outCircleWidth = 2; // Gauge border
@@ -32,33 +58,13 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
 
     constructor() { }
 
-    public setValue(value) {
-
-        value = value * 100;
-
-        if (value < 0) {
-            value = 0;
-        }
-
-        if (value > 100) {
-            value = 100;
-        }
-
-        const range = this.from - this.to;
-
-        this.rotateValue = value * range / 100;
-
-    }
 
     ngOnChanges() {
-        this.setValue(this.value);
-
-        if ( this.unit !== this.originalUnit || this.maxSpeed !== this.originalMaxSpeed ) {
+      if ( this.unit !== this.originalUnit || this.maxSpeed !== this.originalMaxSpeed ) {
             this.originalUnit = this.unit;
             this.originalMaxSpeed = this.maxSpeed;
             this.redraw();
         }
-
     }
 
     ngAfterContentInit() {
@@ -67,19 +73,14 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
     }
 
     ngAfterViewInit() {
-        this.setValue(this.value);
-        this.redraw();
+      this.redraw();
     }
 
-
     private redraw() {
-
         this.drawContainer();
         this.drawPointer();
         this.drawGraduations(this.maxSpeed / 2, 10, 5);
         this.drawText();
-
-
     }
 
     private drawContainer() {
@@ -204,7 +205,6 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
         const useableRange = this.from - this.to;
         const rangePart = useableRange / (gradNumber - 1);
 
-        const current = this.to;
         for (let i = 0; i < gradNumber; i++) {
 
             let speedText = '';
