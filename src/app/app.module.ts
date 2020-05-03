@@ -1,8 +1,8 @@
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-// import { ClassicModule } from 'controller-ui';
-import { ClassicModule } from '../../projects/controller-ui/src/lib/classic/classic.module';
+import { ClassicModule } from 'controller-ui';
+// import { ClassicModule } from '../../projects/controller-ui/src/lib/classic/classic.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';

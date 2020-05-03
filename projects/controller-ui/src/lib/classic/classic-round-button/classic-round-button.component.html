@@ -1,6 +1,6 @@
 <div #buttonCtn class="button-container">
     <div  class="button-outer" [ngStyle]="{'width': buttonSize + 'px', 'height': buttonSize + 'px'}">
-        <button class="button" (click)="press.emit()" [ngStyle]="{'backgroundColor': color, 'boxShadow': shadow, 'color': iconColor, 'fontSize': buttonSize/2 +'px', 'lineHeight': buttonSize/2 +'px'}">
+        <button class="button" (click)="press.emit()" [ngStyle]="{'backgroundColor': color, 'boxShadow': shadow, 'color': iconColor, 'fontSize': buttonSize/2 +'px', 'lineHeight': buttonSize/3 +'px'}">
             <ng-content></ng-content>
         </button>
     </div>
