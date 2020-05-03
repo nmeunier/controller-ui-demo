@@ -198,6 +198,26 @@ Toggle switch component
 
 
 
+#### Classic round button
+
+Classic round button component
+
+```html
+<cui-classic-round-button 
+    [color]="classicRoundButtonColor" 
+    (press)="press($event)">
+    <!-- Content to define icon -->
+    <span class="material-icons">
+        warning
+    </span>
+</cui-classic-round-button>
+```
+
+| Parameter | Description | Type |
+| --- | --- | --- |
+| color | RGB color code to use in button | String |
+| press | Event call on button click | Function |
+| content | Html content to define icon, like material icon code | HTML |
 
 
 ## License

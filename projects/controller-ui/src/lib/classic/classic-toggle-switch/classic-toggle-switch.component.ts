@@ -58,4 +58,9 @@ export class ClassicToggleSwitchComponent {
 
     }
 
+    onTap(event: Event): void {
+        event.preventDefault();
+        this.value = !this.value;
+    }
+
 }

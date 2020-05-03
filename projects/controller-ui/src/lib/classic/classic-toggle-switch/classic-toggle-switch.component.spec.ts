@@ -26,7 +26,7 @@ describe('ClassicToggleSwitchComponent', () => {
     expect(component.value).toEqual(true);
   });
 
-  it('should pan', () => {
+  it('should pan up', () => {
     const handle = fixture.debugElement.query(By.css('[class=toggle-container]'));
     component.value = false;
     handle.triggerEventHandler('panstart', {
@@ -40,11 +40,35 @@ describe('ClassicToggleSwitchComponent', () => {
     expect(component.value).toEqual(true);
   });
 
+  it('should pan down', () => {
+    const handle = fixture.debugElement.query(By.css('[class=toggle-container]'));
+    component.value = true;
+    handle.triggerEventHandler('panstart', {
+        preventDefault: () => {}
+    });
+    handle.triggerEventHandler('panmove', {
+      preventDefault: () => {},
+      deltaY: 10
+    });
+    fixture.detectChanges();
+    expect(component.value).toEqual(false);
+  });
+
   it('should render label in a class="switch-label" tag', async(() => {
     component.label = 'Test Label';
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('.switch-label').textContent).toContain('Test Label');
   }));
+
+  it('should tap', () => {
+    const handle = fixture.debugElement.query(By.css('[class=toggle-container]'));
+    component.value = false;
+    handle.triggerEventHandler('tap', {
+        preventDefault: () => {}
+    });
+    fixture.detectChanges();
+    expect(component.value).toEqual(true);
+  });
 
 });

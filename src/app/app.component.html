@@ -174,4 +174,31 @@
       </mat-card-actions>
   </mat-card>
 
+  <!-- Classic round button -->
+  <mat-card class="component-card">
+    <mat-card-header>
+    <mat-card-title>Classic round button component</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="cui-example-container">
+        <div class="cui-component-example">
+            <cui-classic-round-button [color]="classicRoundButtonColor" (press)="press()">
+                <span class="material-icons">
+                    warning
+                </span>
+            </cui-classic-round-button>
+        </div>
+        <div class="cui-inputs">
+            <p>
+                Event press {{isPress}}
+            </p>
+            <mat-form-field>
+                <input matInput placeholder="Color" [(ngModel)]="classicRoundButtonColor">
+            </mat-form-field>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-button color="primary" href="https://www.npmjs.com/package/controller-ui#classic-round-button">Documentation</a>
+    </mat-card-actions>
+</mat-card>
+
 </div>

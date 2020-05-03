@@ -43,6 +43,10 @@ export class AppComponent {
   public classicToggleSwitchLabel = 'Switch demo';
   public classicToggleSwitchLabelPosition = 'bottom';
 
+  public isPress = 'FALSE';
+  public classicRoundButtonColor = '#FF0000';
+
+
   public classicFunctionDisplayToggleFn(value) {
 
     this['classicFunctionDisplayValue' + value] = !this['classicFunctionDisplayValue' + value];
@@ -60,6 +64,13 @@ export class AppComponent {
 
   public classicToggleSwitchToggle() {
     this.classicToggleSwitchValue = !this.classicToggleSwitchValue;
+  }
+
+  public press() {
+    this.isPress = 'TRUE';
+    setTimeout(() => {
+      this.isPress = 'FALSE';
+    }, 1000);
   }
 
 }

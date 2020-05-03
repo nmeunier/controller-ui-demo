@@ -8,4 +8,5 @@ export * from './lib/classic/classic-direction-handle/classic-direction-handle.c
 export * from './lib/classic/classic-regulator-handle/classic-regulator-handle.component';
 export * from './lib/classic/classic-function-display/classic-function-display.component';
 export * from './lib/classic/classic-toggle-switch/classic-toggle-switch.component';
+export * from './lib/classic/classic-round-button/classic-round-button.component';
 export * from './lib/classic/classic.module';

@@ -1,6 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Component, DebugElement} from '@angular/core';
-import {By} from '@angular/platform-browser';
+import {async, TestBed} from '@angular/core/testing';
 
 import { ClassicSpeedGaugeComponent } from './classic-speed-gauge.component';
 

@@ -1,0 +1,109 @@
+@font-face {
+	font-family: "railfont";
+	src: url("railfont.eot?fcaf03332856acb9d425b5060f5bceb5?#iefix") format("embedded-opentype"),
+url("railfont.woff2?fcaf03332856acb9d425b5060f5bceb5") format("woff2"),
+url("railfont.woff?fcaf03332856acb9d425b5060f5bceb5") format("woff"),
+url("railfont.ttf?fcaf03332856acb9d425b5060f5bceb5") format("truetype"),
+url("railfont.svg?fcaf03332856acb9d425b5060f5bceb5#railfont") format("svg");
+}
+
+.rf {
+	font-family: railfont !important;
+	font-style: normal;
+	font-weight: normal !important;
+	line-height: 1;
+	vertical-align: middle;
+}
+
+.rf-headlight:before {
+	content: "\e001";
+}
+
+.rf-interior-light:before {
+	content: "\e002";
+}
+
+.rf-turnout-cross-cross:before {
+	content: "\e003";
+}
+
+.rf-turnout-cross-none:before {
+	content: "\e004";
+}
+
+.rf-turnout-cross-straight:before {
+	content: "\e005";
+}
+
+.rf-turnout-left-left:before {
+	content: "\e006";
+}
+
+.rf-turnout-left-none:before {
+	content: "\e007";
+}
+
+.rf-turnout-left-straight:before {
+	content: "\e008";
+}
+
+.rf-turnout-right-none:before {
+	content: "\e009";
+}
+
+.rf-turnout-right-right:before {
+	content: "\e00a";
+}
+
+.rf-turnout-right-straight:before {
+	content: "\e00b";
+}
+
+.rf-turnout-symmetric-left:before {
+	content: "\e00c";
+}
+
+.rf-turnout-symmetric-none:before {
+	content: "\e00d";
+}
+
+.rf-turnout-symmetric-right:before {
+	content: "\e00e";
+}
+
+.rf-direction-forward:before {
+	content: "\e00f";
+}
+
+.rf-direction-reverse:before {
+	content: "\e010";
+}
+
+.rf-turnout-single-cross-left-cross:before {
+	content: "\e011";
+}
+
+.rf-turnout-single-cross-left-none:before {
+	content: "\e012";
+}
+
+.rf-turnout-single-cross-left-straight:before {
+	content: "\e013";
+}
+
+.rf-turnout-single-cross-right-cross:before {
+	content: "\e014";
+}
+
+.rf-turnout-single-cross-right-none:before {
+	content: "\e015";
+}
+
+.rf-turnout-single-cross-right-straight:before {
+	content: "\e016";
+}
+
+.rf-warn:before {
+	content: "\e017";
+}
+
