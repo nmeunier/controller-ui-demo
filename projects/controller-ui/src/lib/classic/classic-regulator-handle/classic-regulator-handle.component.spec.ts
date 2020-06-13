@@ -29,6 +29,16 @@ describe('ClassicRegulatorHandleComponent', () => {
     expect(component.value).toEqual(0.5);
   });
 
+  it('should sould be between 0 ans 1 for negative value', () => {
+    component.value = -1;
+    expect(component.value).toEqual(0);
+  });
+
+  it('should sould be between 0 ans 1 for positive value', () => {
+    component.value = 6;
+    expect(component.value).toEqual(1);
+  });
+
   it('should pan 1', () => {
     const handle = fixture.debugElement.query(By.css('[class=ctrl-traction-container]'));
     component.steps = 5;

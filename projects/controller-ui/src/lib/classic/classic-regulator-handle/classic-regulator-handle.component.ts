@@ -23,6 +23,16 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
 
     set value(val: number) {
         val = Math.round(val * 100) / 100;
+
+        // Keep values between 0 and 1
+        if (val < 0) {
+            val = 0;
+        }
+
+        if (val > 1) {
+            val = 1;
+        }
+
         if (val !== this.internalValue) {
             this.internalValue = val;
             this.valueChange.emit(this.internalValue);
