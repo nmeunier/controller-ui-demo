@@ -1,4 +1,3 @@
-sudo: required
 addons:
   chrome: stable
 language: node_js
@@ -12,7 +11,7 @@ before_deploy:
 deploy:
   provider: npm
   email: contact@cabview.io
-  skip_cleanup: true
+  cleanup: true
   api_key:
     secure: T5uVo+/0MU7aXJ1KLJlIKvnmnXhBYpaHTSd25fStpO9m1f1kE1YfPRWzJL4FtaWfT2XJ1C635MqXENA0Pp6KhA4/DziJud9WORs2GuR3knZaQKaL+ihlzDDjapTK17qu5Wk4m+86w58oXAd16na14jyrmTg69lTzG6Uc1I5pXI28YBwxL6FSffDv4AZrrZk97fYyflvaX1HS/MC2/rjzEDN2pXrakTeAp22yFRmCxccSnGYrQ92eOOpkiv3pym9bB5tcvBKfGaUvbghsmRIb/2XK2e/XRIOHu7ZeIGHCnxt0cG9No21j5LjY2rVjbI8N6S3783fpxaiGvy5V2YxOexJp6pTbs2IYi09pYzoEA/PBo7DHJACaAOiuZwF4Jh59dexBQICtbvmPFwBqnUHObowWOMtdy+sR/Eh5LtCaQnCStJApn5wqPGlTqHIqJion5KMiASFmdzm+z0gNJycle0AAsdZP36D4OiNO29BPmlRXtlhVMKpf/9TI6nNlhGVBqgkw8dLDmVyUL5jF7MhhrsMcA5oknnjNrd5DXLOLUCnoCDm9AHDwa2fzx+UVbJa0XLWMmUArflsF8ecNvE0MYV963Bjs7dWwJJ1KsGO/h1Xzn/wPBj9bZ6FDDo+NVr7uL91WAyFMiEhW9DumH4rEKYFSP1Il9PBO/Krv75m+WyQ=
   on:

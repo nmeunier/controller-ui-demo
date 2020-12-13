@@ -28,7 +28,8 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/controller-ui-demo'),
       subdir: '.',
       reporters: [
-        { type: 'lcov'}
+        { type: 'html' },
+        { type: 'text-summary' }
       ]
     },
     reporters: ['progress', 'kjhtml'],
