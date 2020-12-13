@@ -7,14 +7,14 @@ import { Component, ViewChild, Input, ElementRef, AfterViewInit, AfterContentIni
   styleUrls: ['../../styles/font.css', './classic-speed-gauge.component.css']
 })
 export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentInit, OnChanges {
-    @ViewChild('gauge', {static: true}) gauge: ElementRef;
-    @ViewChild('gaugePointer', {static: true}) gaugePointer: ElementRef;
-    @ViewChild('gaugeContainer', {static: true}) gaugeContainer: ElementRef;
-    @Input() maxSpeed: number;
+    @ViewChild('gauge', {static: true}) gauge!: ElementRef;
+    @ViewChild('gaugePointer', {static: true}) gaugePointer!: ElementRef;
+    @ViewChild('gaugeContainer', {static: true}) gaugeContainer!: ElementRef;
+    @Input() maxSpeed!: number;
     @Input() unit?: string;
 
     @Input()
-    get value() {
+    get value(): number {
         return this.internalValue;
     }
 
@@ -46,44 +46,44 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
     private graduateShadow = 5; // Shadow between graduation and gauge center
     private graduateLength = this.radius * 16 / 100;
     private originalMaxSpeed = this.maxSpeed;
-    private originalUnit = this.unit;
+    private originalUnit = '';
 
     // Graduation Angle
     private to = 65;
     private from = 295;
     public rotateValue = 0;
 
-    private ctx: CanvasRenderingContext2D;
-    private pointerCtx: CanvasRenderingContext2D;
+    private ctx!: CanvasRenderingContext2D;
+    private pointerCtx!: CanvasRenderingContext2D;
 
     constructor() { }
 
 
-    ngOnChanges() {
+    ngOnChanges(): void {
       if ( this.unit !== this.originalUnit || this.maxSpeed !== this.originalMaxSpeed ) {
-            this.originalUnit = this.unit;
+            this.originalUnit = this.unit || '';
             this.originalMaxSpeed = this.maxSpeed;
             this.redraw();
         }
     }
 
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this.ctx = this.gauge.nativeElement.getContext('2d');
         this.pointerCtx = this.gaugePointer.nativeElement.getContext('2d');
     }
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
       this.redraw();
     }
 
-    private redraw() {
+    private redraw(): void {
         this.drawContainer();
         this.drawPointer();
         this.drawGraduations(this.maxSpeed / 2, 10, 5);
         this.drawText();
     }
 
-    private drawContainer() {
+    private drawContainer(): void {
 
         if (! this.ctx) {
           return;
@@ -113,7 +113,7 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    private drawText() {
+    private drawText(): void {
 
       if (! this.ctx) {
         return;
@@ -128,7 +128,7 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
       this.ctx.fillText(this.unit || 'km/h', leftPos, topPos);
     }
 
-    private drawPointer() {
+    private drawPointer(): void {
 
       if (! this.ctx) {
         return;
@@ -194,7 +194,7 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    private drawGraduations(gradNumber: number, main: number, sub: number) {
+    private drawGraduations(gradNumber: number, main: number, sub: number): void {
 
         gradNumber = gradNumber + 1;
 
@@ -229,7 +229,7 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
 
     }
 
-    private drawScale(angle, type: string, speedText?: string) {
+    private drawScale(angle: number, type: string, speedText?: string): void {
 
       if (! this.ctx) {
         return;
@@ -291,14 +291,14 @@ export class ClassicSpeedGaugeComponent implements AfterViewInit, AfterContentIn
                 this.ctx.closePath();
                 this.ctx.fill();
 
-                this.setMainGraduationValue(angle, speedText);
+                this.setMainGraduationValue(angle, speedText || '');
 
                 break;
 
         }
     }
 
-    private setMainGraduationValue(angle, speedText) {
+    private setMainGraduationValue(angle: number, speedText: string): void {
 
         const circleRadius = this.radius - this.radius * 34 / 100;
         const fontSize = this.radius * 0.16;

@@ -7,8 +7,8 @@ import { Component, AfterContentInit, Input, ViewChild, ElementRef } from '@angu
 })
 export class ClassicFunctionDisplayComponent implements AfterContentInit {
 
-    @ViewChild('functionCtn', {static: true}) functionCtn: ElementRef;
-    @Input() functions: Array<any>;
+    @ViewChild('functionCtn', {static: true}) functionCtn!: ElementRef;
+    @Input() functions!: Array<any>;
 
     private containerSizeRef = 0;
 
@@ -21,15 +21,15 @@ export class ClassicFunctionDisplayComponent implements AfterContentInit {
 
     }
 
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this.redraw();
     }
 
-    public resize() {
+    public resize(): void {
         this.redraw();
     }
 
-    private redraw() {
+    private redraw(): void {
 
         const containerPos = this.functionCtn.nativeElement.getBoundingClientRect();
         let ratio = 2;

@@ -7,23 +7,23 @@ import { Component, AfterViewInit, AfterContentInit, ViewChild, ElementRef } fro
 })
 export class RegulatorHandleComponent implements AfterContentInit, AfterViewInit {
 
-    @ViewChild('handleCanvas', {static: true}) handle: ElementRef;
+    @ViewChild('handleCanvas', {static: true}) handle!: ElementRef;
 
-    private handleCtx: CanvasRenderingContext2D;
+    private handleCtx!: CanvasRenderingContext2D;
     public handleWidth = 550;
     public handleHeight = 200;
 
     constructor(private el: ElementRef) { }
 
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this.handleCtx = this.handle.nativeElement.getContext('2d');
     }
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.drawHandle();
     }
 
-    drawHandle() {
+    drawHandle(): void {
 
         const radius = this.handleHeight / 2;
         let radgrad = this.handleCtx.createRadialGradient(

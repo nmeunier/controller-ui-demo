@@ -9,16 +9,16 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
   private internalValue = 0;
   private coefValue = 0;
 
-  @ViewChild('ctrlDirectionCtn', {static: true}) ctrlDirectionCtn: ElementRef;
-  @ViewChild('handle', {static: true}) handle: ElementRef;
-  @Input()steps?;
-  @Input()beginFrom?;
+  @ViewChild('ctrlDirectionCtn', {static: true}) ctrlDirectionCtn!: ElementRef;
+  @ViewChild('handle', {static: true}) handle!: ElementRef;
+  @Input()steps!: number;
+  @Input()beginFrom!: number;
   @Input()graduations?: Array<string>;
 
   // Value two way binding
   @Output() valueChange = new EventEmitter();
   @Input()
-  get value() {
+  get value(): number {
       return this.internalValue + this.coefValue;
   }
 
@@ -32,7 +32,7 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
       }
   }
 
-  private manipulatorCtx: CanvasRenderingContext2D;
+  private manipulatorCtx!: CanvasRenderingContext2D;
 
   private x = 0;
   private y = 0;
@@ -53,14 +53,14 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
 
   public rotate = 0;
 
-  @HostListener('window:resize', ['$event']) onResize(event) { this.applySize(); }
+  @HostListener('window:resize', ['$event']) onResize(event: Event): void { this.applySize(); }
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     if (this.beginFrom) {
-      this.coefValue = Number.parseInt(this.beginFrom, 10);
+      this.coefValue = this.beginFrom;
       this.internalValue = this.internalValue - this.coefValue;
     }
 
@@ -74,11 +74,11 @@ export class ClassicDirectionHandleComponent implements OnInit, AfterContentInit
 
 }
 
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
     this.applySize();
   }
 
-  private applySize() {
+  private applySize(): void {
 
       const containerPos = this.ctrlDirectionCtn.nativeElement.getBoundingClientRect();
 

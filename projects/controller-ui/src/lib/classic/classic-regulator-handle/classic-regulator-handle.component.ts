@@ -1,6 +1,15 @@
 import { Component, OnInit, OnChanges, AfterContentInit, ViewChild,
     EventEmitter, ElementRef, Input, Output, HostListener } from '@angular/core';
 
+export interface IGraduation{
+    legend: string;
+    top: number;
+    left: number;
+    rotateX: number;
+    rotateY: number;
+    rotate: number;
+}
+
 @Component({
   selector: 'cui-classic-regulator-handle',
   templateUrl: './classic-regulator-handle.component.html',
@@ -10,14 +19,14 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
 
     private internalValue = 0;
 
-    @ViewChild('ctrlTractionCtn', {static: true}) ctrlTractionCtn: ElementRef;
-    @Input()steps?;
+    @ViewChild('ctrlTractionCtn', {static: true}) ctrlTractionCtn!: ElementRef;
+    @Input()steps!: number;
     @Input()graduations?: string;
 
     // Value two way binding
     @Output() valueChange = new EventEmitter();
     @Input()
-    get value() {
+    get value(): number {
         return this.internalValue;
     }
 
@@ -53,8 +62,7 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
     private endX = 0;
     private endY = 0;
 
-    public graduationsObjs = [];
-    private graduationHeight = 0;
+    public graduationsObjs: Array<IGraduation> = [];
     public graduationWidth = 0;
     private graduationMargin = 0;
     private angleMax = 0;
@@ -68,18 +76,18 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
     public handlePosY = 0;
     public handleRotateAxisX = 0;
     public handleRotateAxisY = 0;
-    public originalGraduations = this.graduations;
+    public originalGraduations = '';
     public originalSteps = this.steps;
 
     private stepAngle = 0;
 
-    @HostListener('window:resize', ['$event']) onResize(event) { this.applySize(); }
+    @HostListener('window:resize', ['$event']) onResize(event: Event): void { this.applySize(); }
 
     constructor(private parentEl: ElementRef) { }
 
-    ngOnChanges() {
+    ngOnChanges(): void {
         if (this.graduations !== this.originalGraduations) {
-            this.originalGraduations = this.graduations;
+            this.originalGraduations = this.graduations || '';
             this.drawLegends();
         }
 
@@ -89,7 +97,7 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
         }
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         this.initSteps();
         this.rotate = (-this.steps + (this.value * this.steps)) * this.stepAngle;
@@ -100,21 +108,21 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
 
     }
 
-    initSteps() {
+    initSteps(): void {
         if (! this.steps) {
             this.steps = 4;
         } else {
-            this.steps = Number.parseInt(this.steps, 10);
+            this.steps = this.steps;
         }
 
         this.stepAngle = (this.angleMax - this.origineAngle) / this.steps;
     }
 
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this.applySize();
     }
 
-    private applySize() {
+    private applySize(): void {
 
         const containerPos = this.parentEl.nativeElement.getBoundingClientRect();
         this.posX = containerPos.left;
@@ -163,7 +171,7 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
 
     }
 
-    private getAngle(x, y) {
+    private getAngle(x: number , y: number): number {
 
         if (y < this.startY) {
             return 0;
@@ -188,7 +196,7 @@ export class ClassicRegulatorHandleComponent implements OnInit, OnChanges, After
         return (angle / (Math.PI / 180)) * -1;
     }
 
-    private drawLegends() {
+    private drawLegends(): void {
 
         if (this.graduations && this.graduations.length > 0) {
 

@@ -7,23 +7,23 @@ import { Component, AfterContentInit, AfterViewInit, ViewChild, ElementRef, Inpu
 })
 export class DirectionHandleComponent implements AfterContentInit, AfterViewInit {
 
-    @ViewChild('handleCanvas', {static: true}) handle: ElementRef;
+    @ViewChild('handleCanvas', {static: true}) handle!: ElementRef;
 
-    private handleCtx: CanvasRenderingContext2D;
+    private handleCtx!: CanvasRenderingContext2D;
     public handleWidth = 600;
     public handleHeight = 200;
 
     constructor() { }
 
-    ngAfterContentInit() {
+    ngAfterContentInit(): void {
         this.handleCtx = this.handle.nativeElement.getContext('2d');
     }
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.drawHandle();
     }
 
-    drawHandle() {
+    drawHandle(): void {
 
         // Bases circle
         const radius = this.handleHeight / 2;

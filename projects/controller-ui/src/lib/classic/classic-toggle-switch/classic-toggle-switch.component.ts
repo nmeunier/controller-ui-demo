@@ -14,16 +14,16 @@ export class ClassicToggleSwitchComponent {
     public cursorHeight = this.containerHeight / 3;
     public y = this.cursorHeight * 0.5;
 
-    @ViewChild('switchBtn', {static: true}) switchBtn: ElementRef;
-    @ViewChild('toggleCtn', {static: true}) toggleCtn: ElementRef;
-    @Input() label: string;
+    @ViewChild('switchBtn', {static: true}) switchBtn!: ElementRef;
+    @ViewChild('toggleCtn', {static: true}) toggleCtn!: ElementRef;
+    @Input() label!: string;
     @Input() labelPosition?: string;
 
     constructor() { }
 
     @Output() valueChange = new EventEmitter();
     @Input()
-    get value() {
+    get value(): boolean {
         return this.internalValue;
     }
 

@@ -47,9 +47,14 @@ export class AppComponent {
   public classicRoundButtonColor = '#FF0000';
 
 
-  public classicFunctionDisplayToggleFn(value) {
+  public classicFunctionDisplayToggleFn(value: number): void {
 
-    this['classicFunctionDisplayValue' + value] = !this['classicFunctionDisplayValue' + value];
+    if (value === 0){
+      this.classicFunctionDisplayValue0 = !this.classicFunctionDisplayValue0;
+    }else{
+      this.classicFunctionDisplayValue1 = !this.classicFunctionDisplayValue1;
+    }
+
 
     this.classicFunctionDisplayGroup = [{
       name: 'Fn0',
@@ -62,11 +67,11 @@ export class AppComponent {
     }];
   }
 
-  public classicToggleSwitchToggle() {
+  public classicToggleSwitchToggle(): void {
     this.classicToggleSwitchValue = !this.classicToggleSwitchValue;
   }
 
-  public press() {
+  public press(): void {
     this.isPress = 'TRUE';
     setTimeout(() => {
       this.isPress = 'FALSE';

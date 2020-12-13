@@ -8,9 +8,9 @@ import { ColorManipulation } from '../../utils/color-manipulation';
 })
 export class ClassicRoundButtonComponent implements AfterContentInit, OnChanges {
 
-  @ViewChild('buttonCtn', {static: true}) buttonCtn: ElementRef;
+  @ViewChild('buttonCtn', {static: true}) buttonCtn!: ElementRef;
 
-  @Input() color: string;
+  @Input() color!: string;
   @Output() press = new EventEmitter();
 
   public buttonSize = 100;
@@ -21,19 +21,19 @@ export class ClassicRoundButtonComponent implements AfterContentInit, OnChanges 
 
   }
 
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
       this.redraw();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.redraw();
 }
 
-  public resize() {
+  public resize(): void {
       this.redraw();
   }
 
-  private redraw() {
+  private redraw(): void {
 
       const containerPos = this.buttonCtn.nativeElement.getBoundingClientRect();
 
