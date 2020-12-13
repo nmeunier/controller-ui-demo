@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-ci": "ng build controller-ui",
+    "build-ci": "ng build controller-ui --prod",
     "test-ci": "ng test controller-ui --code-coverage --watch=false --browsers=ChromeHeadless",
     "report-coverage-ci": "cat ./coverage/controller-ui/lcov.info | codecov",
     "test": "ng test",
